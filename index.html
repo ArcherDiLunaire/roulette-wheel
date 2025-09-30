@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>roulette-wheel</title>
+</head>
+
+<body>
+  <h1>SPIN ME</h1>
+  <div class="wheel-container">
+    <div class="wheel-touchzone">
+      <img id="wheel" src="/assets/wheel.png" alt="Wheel" />
+    </div>
+    <img id="shadow" src="/assets/wheel_shadow.png" alt="Wheel shadow" />
+    <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 10 20 60'
+      id="clicker">
+      <path d="M 3 20 Q 10 0 17 20 Q 10 100 3 20" fill="#ddd" />
+    </svg>
+  </div>
+
+  <span id="debug"></span>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
