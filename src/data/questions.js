@@ -54,8 +54,8 @@ const modal_data = {
     copy: {
         text: "Sample text",
         unlucky: "Better luck next time!",
-        correct: "Correct! 🎉, go collect your prize!",
-        incorrect: "Incorrect! ❌, try again later!"
+        correct: "Correct! 🎉, <br> collect your prize!",
+        incorrect: "Incorrect! ❌, <br> try again later!"
     }
 };
 

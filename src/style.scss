@@ -4,7 +4,7 @@ html {
 }
 
 body {
-    background-color: #373636;
+    background-color: #1a1a1a;
     height: 100%;
     margin: 0px;
     display: flex;
@@ -90,7 +90,8 @@ h1, #debug {
     left: 0;
     margin: 20px auto;
     pointer-events: auto;
-    background-color: #ababab;
+    background-color: #000000;
+    color: white;
     opacity: 0.9;
     z-index: 10;
     display: flex;
@@ -100,5 +101,20 @@ h1, #debug {
     display: none;
     &.isVisible {
         display: flex;
+    }
+}
+
+button{
+    background-color: black;
+    border: solid 1px white;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    &:hover {
+        background-color: #e0e0e0;
+        color: black;
     }
 }
