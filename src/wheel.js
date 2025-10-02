@@ -34,17 +34,8 @@ export class Wheel {
     this.startY = null;
     this.targetAngle = null;
     this.positionCallbacks = [];
-
     this.slots = new Slots();
-    this.slots.setCount(12); // number of slots on your wheel
-    this.slots.setWeights([5, 5, 3, 2, 2, 2, 2, 2, 2, 1, 2, 2]);
-    this.slots.setSlotCap(9, 15); // slot index 9 (slot 10) max 15 selections per 24h
   }
-
-  // setTargetAngle(slot) {
-  //   // Call this before a spin to define the final stopping angle
-  //   this.targetAngle = slot * (360 / this.slotAmount) - (360 / this.slotAmount);
-  // }
 
   calculatePositions() {
     this.wheelWidth = this.wheelElm.getBoundingClientRect()['width'];
@@ -130,9 +121,6 @@ export class Wheel {
 
   animateToTarget(oldAngle, newAngle, direction, duration, bounce = false) {
     const startAngle = oldAngle;
-    console.log("SNAP", newAngle, direction, duration);
-
-
     const startTime = performance.now();
     const animate = (time) => {
       const elapsed = time - startTime;
@@ -149,7 +137,6 @@ export class Wheel {
       } else if(this.isSpinning === true) {
         this.isSpinning = false;
         this.oldAngle = this.currentAngle;
-        console.log("STOP", this.slot);
         const event = new CustomEvent('wheelStop', { detail: { slot: this.slot } });
         this.wheelElm.dispatchEvent(event);
       }

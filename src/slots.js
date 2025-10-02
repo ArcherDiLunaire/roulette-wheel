@@ -90,7 +90,7 @@ export class Slots {
     }
 
     // --- Record a selection (call after you decide the slot) ---
-    _recordSelection(slotIndex) {
+    recordSelection(slotIndex) {
         const now = Date.now();
         if (!this._history[slotIndex]) this._history[slotIndex] = [];
         // keep list sorted ascending (we always push, so push is fine)
@@ -148,7 +148,7 @@ export class Slots {
     chooseSlotAndSetTarget() {
         const chosen = this._chooseWeightedSlot();
         // record immediately (prevents race where same client triggers twice)
-        this._recordSelection(chosen);
+        // this._recordSelection(chosen);
         const angle = this.getAngleForSlot(chosen);
         return { slot: chosen + 1, angle };
     }
