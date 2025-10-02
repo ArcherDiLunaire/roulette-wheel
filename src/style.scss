@@ -1,5 +1,6 @@
 html {
     height: 100%;
+    overflow: hidden
 }
 
 body {
@@ -20,7 +21,9 @@ h1, #debug {
 #debug {
     position: absolute;
     bottom: 10px;
-    font-size: 20px;
+    font-size: 14px;
+    color: #ababab;
+    text-align: center;
 }
 
 .wheel-container {
@@ -68,16 +71,6 @@ h1, #debug {
     }
 }
 
-// #spinner{
-// 	width: 400px;
-// 	height: 400px;
-// 	min-width: 400px;
-// 	min-height: 400px;
-// 	align-items: center;
-// 	position: relative;
-// 	overflow: hidden;
-// }
-
 #clicker{
 	position: absolute;
 	top: 0px;
@@ -89,55 +82,23 @@ h1, #debug {
 	pointer-events: none;
 }
 
-// #wheel{
-// 	position: absolute;
-// 	top: 30px;
-// 	left: 30px;
-// 	width: calc(100% - 60px);
-// 	height: calc(100% - 60px);
-// 	box-sizing: border-box;
-// 	border-radius: 100%;
-// 	cursor: pointer;
-// 	border: solid white 10px;
-// 	will-change: transform;
-// 	z-index: 1;
-// }
-
-// #shaddow{
-// 	position: absolute;
-// 	top: 30px;
-// 	left: 30px;
-// 	right: 30px;
-// 	bottom: 30px;
-// 	border-radius: 100%;
-// 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-// }
-
-// #splineMask > path{
-// 	fill: black;
-// }
-
-// #wheel > #middle{
-// 	fill: white;
-// }
-
-// #wheel > #knob{
-// 	fill: #ddd;
-// }
-
-// #wheel > text{
-// 	fill: white;
-// 	font-weight: bold;
-// 	-webkit-touch-callout: none;
-//     -webkit-user-select: none;
-//      -khtml-user-select: none;
-//        -moz-user-select: none;
-//         -ms-user-select: none;
-//             user-select: none;
-// }
-
-// @media screen and ( max-height: 500px ) {
-// 	h1{
-// 		display: none;
-// 	}
-// }
+.modal{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 20px auto;
+    pointer-events: auto;
+    background-color: #ababab;
+    opacity: 0.9;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: none;
+    &.isVisible {
+        display: flex;
+    }
+}
