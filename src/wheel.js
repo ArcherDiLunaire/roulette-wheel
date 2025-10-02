@@ -80,14 +80,14 @@ export class Wheel {
       this.isDragging = false;
       let speed = this.lastAngles[0] - this.lastAngles[2];
       if (Math.abs(speed) < 7) {
-        this.animateToTarget(this.currentAngle, this.oldAngle, -Math.sign(speed), 500, true);
+        this.animateToTarget(this.currentAngle, this.oldAngle, 500, true);
         return; // Minimum speed to trigger a spin
       }
       this.oldAngle = this.currentAngle;
       const u = this.slots.chooseSlotAndSetTarget();
       this.slot = u.slot; // +1 to make it 1-based
       this.targetAngle = u.angle;
-      document.querySelector('#debug').innerHTML = `${this.slot} <br /> ${JSON.stringify(this.slots._getAllCounts())}`;
+      document.querySelector('#debug').innerHTML = `slot: ${this.slot} <br/> all slots count: ${JSON.stringify(this.slots._getAllCounts())}`;
       this.momentum(speed);
     }
   }
@@ -111,7 +111,7 @@ export class Wheel {
         this.isSpinning = true;
         const finalAngle = Math.floor(this.oldAngle / 360) * 360 + (360 * -Math.sign(speed) + (((360 + (this.targetAngle * Math.sign(speed))) % 360)) * - Math.sign(speed));
         const t = Math.abs((this.oldAngle - finalAngle) / (speed * 0.02)); // Duration based on speed
-        this.animateToTarget(this.oldAngle, finalAngle, Math.sign(speed), t);
+        this.animateToTarget(this.oldAngle, finalAngle, t);
       }
     }
 
@@ -119,7 +119,7 @@ export class Wheel {
     this.render(this.oldAngle);
   }
 
-  animateToTarget(oldAngle, newAngle, direction, duration, bounce = false) {
+  animateToTarget(oldAngle, newAngle, duration, bounce = false) {
     const startAngle = oldAngle;
     const startTime = performance.now();
     const animate = (time) => {
