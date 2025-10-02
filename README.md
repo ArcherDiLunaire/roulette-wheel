@@ -1,5 +1,6 @@
 # roulette-wheel
-questions and answer roulette wheel prototype
+Questions and answer roulette wheel prototype
+project runs on vite and scss
 
 ## install
 `npm install`
