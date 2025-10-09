@@ -1,6 +1,7 @@
 import './style.scss'
 import { Wheel } from './wheel.js'
 import modal_data from './data/questions.js';
+import confetti from 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/+esm'
 
 const wheelTouch = document.querySelector('.wheel-touchzone');
 const wheelElm = wheelTouch.querySelector('#wheel');
@@ -13,7 +14,9 @@ wheel.slots.setSlotCap(5, 2); // slot index 5 (slot 6) max 2 selections per 24h
 const modal = document.getElementById('modal');
 let randomIndex = 0;
 
-// clearMessage();
+let size = window.innerHeight / 800;
+
+clearMessage();
 
 wheelElm.addEventListener('wheelStop', (e) => {
     // Show the modal
@@ -74,12 +77,12 @@ function InsertQuestion(slot) {
 }
 
 function clearMessage() {
-    modal.classList.remove('isVisible');
+    modal.querySelector('.modal-container').style.opacity = 0;
+    modal.querySelector('.modal-container').classList.remove('shake');
     modal.querySelector('.modal-title').src = ``;
     modal.querySelector('.modal-message').style.display = 'none';
     modal.querySelector('.modal-wrapper').style.display = 'none';
     modal.querySelector('.modal-answers').innerHTML = ``;
-
 }
 
 function correctAnswer(slot) {
@@ -102,9 +105,19 @@ function correctAnswer(slot) {
     modal.querySelector('.modal-title').src = `/assets/titles/title_3.png`;
     modal.querySelector('.modal-prize').src = prize;
     modal.querySelector('.modal-text').innerHTML = `¡Has ganado un producto Danone sorpresa! Dirígete al stand y recógelo.`;
+
+    confetti({
+        particleCount: 200,
+        scalar: size,
+        spread: 360,
+        startVelocity: 35 * size,
+        origin: { y: 0.5 },
+        colors: ['FFE400', 'FFBD00', 'E89400', 'FFCA6C', 'FDFFB8']
+    });
+
     setTimeout(() => {
-        modal.classList.add('isVisible');
-    }, 100)
+        modal.querySelector('.modal-container').style.opacity = 1;
+    }, 500)
 }
 
 function tryAgain() {
@@ -114,6 +127,7 @@ function tryAgain() {
     modal.querySelector('.modal-prize').src = `/assets/answers/answer_wrong.png`;
     modal.querySelector('.modal-text').innerHTML = modal_data.copy.incorrect;
     setTimeout(() => {
-        modal.classList.add('isVisible');
-    }, 100)
+        modal.querySelector('.modal-container').classList.add('shake');
+        modal.querySelector('.modal-container').style.opacity = 1;
+    }, 300)
 }

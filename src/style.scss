@@ -301,6 +301,16 @@ $animationSpeed: 40s;
         }
     }
 
+    @keyframes bounce2 {
+        0% {
+            transform: translateY(0);
+        }
+
+        100% {
+            transform: translateY(-66%);
+        }
+    }
+
     .modal-container {
         opacity: 0;
         transform: translateY(500px);
@@ -313,6 +323,10 @@ $animationSpeed: 40s;
         display: flex;
         flex-direction: column;
         position: relative;
+
+        &.shake {
+            animation: wiggle 0.2s ease-in-out forwards;
+        }
 
         .modal-close {
             position: absolute;
@@ -442,8 +456,7 @@ $animationSpeed: 40s;
             pointer-events: auto;
 
             &:active {
-                background: white;
-                color: #07ACED;
+                background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #07ACED;
             }
         }
     }
