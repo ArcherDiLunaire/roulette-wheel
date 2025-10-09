@@ -2,8 +2,10 @@ import { Slots } from "./slots";
 
 export class Wheel {
   constructor(el) {
-    this.wheelElm = el;
-    this.wheelElm.addEventListener('mousedown', e => {
+    this.wheelTouch = el;
+    this.wheelElm = this.wheelTouch.querySelector('#wheel');
+
+    this.wheelTouch.addEventListener('mousedown', e => {
       this.onGrab(e.clientX, e.clientY);
     });
     window.addEventListener('mousemove', e => {
@@ -15,7 +17,7 @@ export class Wheel {
     });
     window.addEventListener('mouseup', this.onRelease.bind(this));
 
-    this.wheelElm.addEventListener('touchstart', e => {
+    this.wheelTouch.addEventListener('touchstart', e => {
       this.onGrab(e.touches[0].clientX, e.touches[0].clientY);
     });
     window.addEventListener('touchmove', e => {

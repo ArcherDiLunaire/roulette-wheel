@@ -4,35 +4,144 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>roulette-wheel</title>
 </head>
 
 <body>
-  <h1>SPIN ME</h1>
+  <div class="background"></div>
+  <div class="logo"> <img src="/assets/logo.png" alt="Sondersland Logo" /></div>
+  <div class="title">
+    <img src="/assets/titles/game_title.png" alt="Spin and win" />
+    <h1 class="subtitle">Desliza para girar la rueda</h1>
+  </div>
   <div class="wheel-container">
+    <arrow class="arrow">
+      <img src="/assets/arrow.png" alt="Arrow" />
+    </arrow>
     <div class="wheel-touchzone">
       <img id="wheel" src="/assets/wheel.png" alt="Wheel" />
+      <img id="shadow" src="/assets/wheel_shadow.png" alt="Wheel shadow" />
     </div>
-    <img id="shadow" src="/assets/wheel_shadow.png" alt="Wheel shadow" />
-    <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 10 20 60'
-      id="clicker">
-      <path d="M 3 20 Q 10 0 17 20 Q 10 100 3 20" fill="#ddd" />
-    </svg>
   </div>
-
-  <div id="modal" class="modal">
-    <div class="modal-inner">
-      <div class="modal-background"></div>
-      <button class="modal-close" aria-label="close">close</button>
-      <div class="modal-content">
-        <!-- Any other content -->
+  <div class="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_1.png" alt="Prize 1" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_2.png" alt="Prize 2" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_3.png" alt="Prize 3" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_4.png" alt="Prize 4" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_5.png" alt="Prize 5" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_6.png" alt="Prize 6" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_7.png" alt="Prize 7" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_8.png" alt="Prize 8" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_9.png" alt="Prize 9" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_10.png" alt="Prize 10" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_11.png" alt="Prize 11" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_12.png" alt="Prize 12" />
+      </div>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_1.png" alt="Prize 1" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_2.png" alt="Prize 2" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_3.png" alt="Prize 3" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_4.png" alt="Prize 4" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_5.png" alt="Prize 5" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_6.png" alt="Prize 6" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_7.png" alt="Prize 7" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_8.png" alt="Prize 8" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_9.png" alt="Prize 9" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_10.png" alt="Prize 10" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_11.png" alt="Prize 11" />
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/prizes/prize_12.png" alt="Prize 12" />
       </div>
     </div>
   </div>
+  <div class="people">
+    <img src="/assets/people.png" alt="People" />
+  </div>
+  <div class="bubble">
+    <img src="/assets/bubble.png" alt="Bubble" />
+    <div class="bubble-text">
+      <span>Acierta las preguntas y gana uno de estos premios.</span>
+    </div>
+  </div>
 
-  <span id="debug"></span>
-  <script type="module" src="/src/main.js"></script>
+  <div id="modal" class="modal isVisible">
+    <div class="modal-container">
+      <button class="modal-close" aria-label="close"></button>
+      <div class="modal-content">
+        <div class="modal-header">
+          <img class="modal-title" src="/assets/titles/title_1.png" alt="title" />
+          <div class="modal-icons">
+            <img class="modal-icon-1" src="/assets/logo.png" alt="Sondersland logo" />
+            <img class="modal-icon-2" src="/assets/danone_logo.png" alt="Danone logo" />
+          </div>
+        </div>
+        <div class="modal-message">
+          <!-- <span class="modal-subtitle">Answer the question</span>
+          <p class="modal-question">In a world where creativity knows no bounds, we explore the depths of imagination?
+          </p> -->
+        </div>
+        <div class="modal-wrapper">
+          <img class="modal-prize" src="/assets/prizes/prize_1.png" alt="Prize" />
+          <div class="modal-text">
+            ¡Esta vez no pudo ser, pero seguro que a la próxima la suerte estará contigo!
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-answers">
+      <!-- Answer buttons will be dynamically inserted here -->
+    </div>
+
+    <span id="debug"></span>
+    <script type="module" src="/src/main.js"></script>
 </body>
 
 </html>
