@@ -1,5 +1,5 @@
 export default {
-  base: "./",
+  base: "",
   root: '',
   server: {
     port: 3000,
