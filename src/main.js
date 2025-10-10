@@ -32,6 +32,7 @@ function showModal(slot) {
         wheel.slots.recordSelection(slot - 1); // Record the selection for the unlucky slot
     } else {
         InsertQuestion(slot);
+        modal.querySelector('.modal-container').classList.add('active');
     }
     modal.classList.add('isVisible');
 }
@@ -56,7 +57,7 @@ function InsertQuestion(slot) {
         answersHtml += `<button class="answer-button" data-answer="${index + 1}">${answer}</button>`;
     });
 
-    modal.querySelector('.modal-title').src = `/assets/titles/title_1.png`;
+    modal.querySelector('.modal-title').src = `./assets/titles/title_1.png`;
     modal.querySelector('.modal-message').innerHTML = `
         <span class="modal-subtitle">Answer the question</span>
         <p class="modal-question">${questionObj.question}</p>`;
@@ -77,7 +78,7 @@ function InsertQuestion(slot) {
 }
 
 function clearMessage() {
-    modal.querySelector('.modal-container').style.opacity = 0;
+    modal.querySelector('.modal-container').classList.remove('active');
     modal.querySelector('.modal-container').classList.remove('shake');
     modal.querySelector('.modal-title').src = ``;
     modal.querySelector('.modal-message').style.display = 'none';
@@ -90,44 +91,42 @@ function correctAnswer(slot) {
     let prize;
     switch (slot) {
         case 1:
-            prize = `/assets/answers/answer_bag.png`;
+            prize = `./assets/answers/answer_bag.png`;
             break;
         case 1:
-            prize = `/assets/answers/answer_tote.png`;
+            prize = `./assets/answers/answer_tote.png`;
             break;
         case 3:
-            prize = `/assets/answers/answer_prize.png`;
+            prize = `./assets/answers/answer_prize.png`;
             break;
         default:
-            prize = `/assets/answers/answer_sticker.png`;
+            prize = `./assets/answers/answer_sticker.png`;
     }
     modal.querySelector('.modal-wrapper').style.display = 'flex';
-    modal.querySelector('.modal-title').src = `/assets/titles/title_3.png`;
+    modal.querySelector('.modal-title').src = `./assets/titles/title_3.png`;
     modal.querySelector('.modal-prize').src = prize;
     modal.querySelector('.modal-text').innerHTML = `¡Has ganado un producto Danone sorpresa! Dirígete al stand y recógelo.`;
 
-    confetti({
-        particleCount: 200,
-        scalar: size,
-        spread: 360,
-        startVelocity: 35 * size,
-        origin: { y: 0.5 },
-        colors: ['FFE400', 'FFBD00', 'E89400', 'FFCA6C', 'FDFFB8']
-    });
-
     setTimeout(() => {
-        modal.querySelector('.modal-container').style.opacity = 1;
-    }, 500)
+        confetti({
+            particleCount: 200,
+            scalar: size,
+            spread: 360,
+            startVelocity: 35 * size,
+            origin: { y: 0.5 },
+            colors: ['FFE400', 'FFBD00', 'E89400', 'FFCA6C', 'FDFFB8']
+        });
+        modal.querySelector('.modal-container').classList.add('active');
+    }, 100)
 }
 
 function tryAgain() {
     clearMessage();
     modal.querySelector('.modal-wrapper').style.display = 'flex';
-    modal.querySelector('.modal-title').src = `/assets/titles/title_2.png`;
-    modal.querySelector('.modal-prize').src = `/assets/answers/answer_wrong.png`;
+    modal.querySelector('.modal-title').src = `./assets/titles/title_2.png`;
+    modal.querySelector('.modal-prize').src = `./assets/answers/answer_wrong.png`;
     modal.querySelector('.modal-text').innerHTML = modal_data.copy.incorrect;
     setTimeout(() => {
         modal.querySelector('.modal-container').classList.add('shake');
-        modal.querySelector('.modal-container').style.opacity = 1;
-    }, 300)
+    }, 100)
 }

@@ -237,7 +237,7 @@ $animationSpeed: 40s;
     &.isVisible {
         display: flex;
 
-        .modal-container {
+        .modal-container.active{
             animation: fadeInUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
@@ -326,6 +326,7 @@ $animationSpeed: 40s;
 
         &.shake {
             animation: wiggle 0.2s ease-in-out forwards;
+            opacity: 1;
         }
 
         .modal-close {
