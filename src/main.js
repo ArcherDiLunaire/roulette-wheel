@@ -17,7 +17,7 @@ const tryAgainSlot = 2;
 
 let wheel = new Wheel(wheelTouch);
 wheel.slots.setCount(12); // number of slots on your wheel
-wheel.slots.setWeights([1, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 10]);
+wheel.slots.setWeights([1, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
 //stickers
 stickersSlots.forEach(slot => {
     wheel.slots.setSlotCap(slot - 1, stickersCap / stickersSlots.length); // slot index, max selection per 48h
