@@ -42,11 +42,33 @@ function closeModal() {
 }
 
 function InsertQuestion(slot) {
-    const questions = modal_data.questions;
-    let oldrandomIndex = randomIndex;
-    while (oldrandomIndex === randomIndex) {
-        randomIndex = Math.floor(Math.random() * questions.length);
+    let category;
+    switch (slot) {
+        case 1:
+        case 3:
+            category = "yogurt";
+            break;
+        case 4:
+        case 8:
+        case 6:
+            category = "sustainability";
+            break;
+        case 7:
+        case 5:
+        case 9:
+            category = "history";
+            break;
+        case 10:
+        case 11:
+        case 12:
+            category = "brand";
+            break;
+        default:
+            category = "brand";
     }
+    const questions = modal_data.questions[category];
+    console.log(category, questions);
+    randomIndex = Math.floor(Math.random() * questions.length);
     const questionObj = questions[randomIndex];
 
     clearMessage();
@@ -89,23 +111,31 @@ function clearMessage() {
 function correctAnswer(slot) {
     clearMessage();
     let prize;
+    let text;
     switch (slot) {
         case 1:
             prize = `./assets/answers/answer_bag.png`;
-            break;
-        case 1:
-            prize = `./assets/answers/answer_tote.png`;
+            text = "bag";
             break;
         case 3:
+        case 4:
+            prize = `./assets/answers/answer_tote.png`;
+            text = "tote";
+            break;
+        case 8:
+        case 9:
+        case 10:
             prize = `./assets/answers/answer_prize.png`;
+            text = "prize";
             break;
         default:
             prize = `./assets/answers/answer_sticker.png`;
+            text = "sticker";
     }
     modal.querySelector('.modal-wrapper').style.display = 'flex';
     modal.querySelector('.modal-title').src = `./assets/titles/title_3.png`;
     modal.querySelector('.modal-prize').src = prize;
-    modal.querySelector('.modal-text').innerHTML = `¡Has ganado un producto Danone sorpresa! Dirígete al stand y recógelo.`;
+    modal.querySelector('.modal-text').innerHTML = modal_data.copy[text];
 
     setTimeout(() => {
         confetti({
@@ -114,6 +144,7 @@ function correctAnswer(slot) {
             spread: 360,
             startVelocity: 35 * size,
             origin: { y: 0.5 },
+            // colors: ['FFE400', 'FFBD00', 'E89400', 'FFCA6C', 'FDFFB8']
             colors: ['FFE400', 'FFBD00', 'E89400', 'FFCA6C', 'FDFFB8']
         });
         modal.querySelector('.modal-container').classList.add('active');

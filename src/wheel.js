@@ -89,7 +89,9 @@ export class Wheel {
       const u = this.slots.chooseSlotAndSetTarget();
       this.slot = u.slot; // +1 to make it 1-based
       this.targetAngle = u.angle;
-      document.querySelector('#debug').innerHTML = `slot: ${this.slot} <br/> all slots count: ${JSON.stringify(this.slots._getAllCounts())}`;
+
+      //DEBUG
+      // document.querySelector('#debug').innerHTML = `slot: ${this.slot} <br/> all slots count: ${JSON.stringify(this.slots._getAllCounts())}`;
       this.momentum(speed);
     }
   }
