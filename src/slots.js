@@ -110,8 +110,6 @@ export class Slots {
             }
         }
 
-        console.log('Available slots (not at cap):', available);
-
         // if nothing available because of caps (or weights 0), fallback to slots that have weight>0 ignoring caps
         let candidateSlots = available;
         if (candidateSlots.length === 0) {

@@ -131,6 +131,7 @@ img {
         -ms-user-select: none;
         user-select: none;
         z-index: 1;
+        will-change: transform;
     }
 
     #wheel,
@@ -139,7 +140,6 @@ img {
         position: absolute;
         width: 96%;
         height: auto;
-        will-change: transform;
     }
 
     .arrow {
@@ -194,6 +194,7 @@ $animationSpeed: 40s;
     align-items: center;
 
     .carousel-inner {
+        will-change: transform;
         animation: scroll $animationSpeed linear infinite;
         display: flex;
         min-width: calc(14vh * 12);
@@ -203,6 +204,7 @@ $animationSpeed: 40s;
 
     @for $i from 0 through 12 {
         .carousel-item:nth-child(#{$i}n) {
+            will-change: transform;
             animation: wiggle 0.7s linear infinite;
             animation-delay: #{$i * 0.1}s;
         }
@@ -260,15 +262,18 @@ $animationSpeed: 40s;
         }
 
         .modal-close {
+            will-change: transform;
             animation: bounce1 0.4s cubic-bezier(0.48, 0.56, 0.21, 1.45) 0.1s forwards;
         }
 
         .modal-title {
+            will-change: transform;
             animation: bounce2 0.4s cubic-bezier(0.48, 0.56, 0.25, 1.68) forwards;
         }
 
         @for $i from 1 through 2 {
             .answer-button:nth-child(#{$i}n) {
+                will-change: transform opacity;
                 animation: fadeInScale 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
                 animation-delay: #{calc($i / 8) + 0.3}s;
             }
@@ -330,6 +335,7 @@ $animationSpeed: 40s;
     }
 
     .modal-container {
+        will-change: transform opacity;
         opacity: 0;
         transform: translateY(500px);
         border-radius: 2.2vh;

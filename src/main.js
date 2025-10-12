@@ -99,7 +99,6 @@ function InsertQuestion(slot) {
     }
     const questions = modal_data.questions[category];
     randomIndex = Math.floor(Math.random() * questions.length);
-    console.log(category, questions, randomIndex);
     const questionObj = questions[randomIndex];
 
     clearMessage();
