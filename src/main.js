@@ -5,29 +5,60 @@ import confetti from 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/+esm'
 
 const wheelTouch = document.querySelector('.wheel-touchzone');
 const wheelElm = wheelTouch.querySelector('#wheel');
+const stickersCap = 500;
+const stickersSlots = [1,3,4,5,6];
+const productCap = 400;
+const productSlots = [7,8,9];
+const toteCap = 100;
+const toteSlots = [10,11];
+const bagCap = 15;
+const bagSlot = 12;
+const tryAgainSlot = 2;
+
 let wheel = new Wheel(wheelTouch);
 wheel.slots.setCount(12); // number of slots on your wheel
-wheel.slots.setWeights([5, 5, 3, 2, 2, 2, 2, 2, 2, 1, 2, 2]);
-wheel.slots.setSlotCap(9, 15); // slot index 9 (slot 10) max 15 selections per 24h
-wheel.slots.setSlotCap(4, 1); // slot index 4 (slot 5) max 1 selection per 24h
-wheel.slots.setSlotCap(5, 2); // slot index 5 (slot 6) max 2 selections per 24h
+wheel.slots.setWeights([1, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 10]);
+//stickers
+stickersSlots.forEach(slot => {
+    wheel.slots.setSlotCap(slot - 1, stickersCap / stickersSlots.length); // slot index, max selection per 48h
+});
+//products
+productSlots.forEach(slot => {
+    wheel.slots.setSlotCap(slot - 1, productCap / productSlots.length); // slot index, max selection per 48h
+});
+// tote
+toteSlots.forEach(slot => {
+    wheel.slots.setSlotCap(slot - 1, toteCap / toteSlots.length); // slot index, max selection per 48h
+});
+//bag
+wheel.slots.setSlotCap(bagSlot - 1, 0) //slot is unavailable until activated
+
 const modal = document.getElementById('modal');
 let randomIndex = 0;
 
-let size = window.innerHeight / 800;
+let size;
+setSize();
 
 clearMessage();
+
+window.addEventListener('resize', setSize);
 
 wheelElm.addEventListener('wheelStop', (e) => {
     // Show the modal
     showModal(e.detail.slot);
 });
 
+document.querySelector(".count-btn").addEventListener('click', updateCap);
+
 document.querySelector('.modal-close').addEventListener('click', closeModal);
+
+function setSize(){
+    size = window.innerHeight / 800;
+}
 
 function showModal(slot) {
     // Implementation for showing the modal
-    if (slot === 2) {
+    if (slot === tryAgainSlot) {
         tryAgain();
         wheel.slots.recordSelection(slot - 1); // Record the selection for the unlucky slot
     } else {
@@ -67,8 +98,8 @@ function InsertQuestion(slot) {
             category = "brand";
     }
     const questions = modal_data.questions[category];
-    console.log(category, questions);
     randomIndex = Math.floor(Math.random() * questions.length);
+    console.log(category, questions, randomIndex);
     const questionObj = questions[randomIndex];
 
     clearMessage();
@@ -112,19 +143,16 @@ function correctAnswer(slot) {
     clearMessage();
     let prize;
     let text;
-    switch (slot) {
-        case 1:
+    switch (true) {
+        case bagSlot === slot:
             prize = `./assets/answers/answer_bag.png`;
             text = "bag";
             break;
-        case 3:
-        case 4:
+        case toteSlots.includes(slot):
             prize = `./assets/answers/answer_tote.png`;
             text = "tote";
             break;
-        case 8:
-        case 9:
-        case 10:
+        case productSlots.includes(slot):
             prize = `./assets/answers/answer_prize.png`;
             text = "prize";
             break;
@@ -160,4 +188,14 @@ function tryAgain() {
     setTimeout(() => {
         modal.querySelector('.modal-container').classList.add('shake');
     }, 100)
+}
+
+function updateCap(e){
+    if(e.currentTarget.classList.contains("isActive")){
+        e.currentTarget.classList.remove("isActive");
+        wheel.slots.setSlotCap(bagSlot - 1, 0);
+    } else {
+        e.currentTarget.classList.add("isActive");
+        wheel.slots.setSlotCap(bagSlot - 1, bagCap);
+    }
 }

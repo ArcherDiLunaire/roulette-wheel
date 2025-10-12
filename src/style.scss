@@ -1,6 +1,13 @@
 html {
-    height: 100%;
-    overflow: hidden
+    height: 100vh;
+    overflow: hidden;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
@@ -48,6 +55,17 @@ img {
     margin: 3vw;
     width: 15vw;
     max-width: 160px;
+}
+
+.count-btn {
+    appearance: none;
+    border: none;
+    pointer-events: auto;
+    background: transparent;
+
+    &.isActive {
+        mix-blend-mode: luminosity;
+    }
 }
 
 .title {
@@ -237,7 +255,7 @@ $animationSpeed: 40s;
     &.isVisible {
         display: flex;
 
-        .modal-container.active{
+        .modal-container.active {
             animation: fadeInUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 

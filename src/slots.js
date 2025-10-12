@@ -52,7 +52,7 @@ export class Slots {
         if (now - this._lastPrune < this._pruneIntervalMs) return;
         this._lastPrune = now;
 
-        const cutoff = now - 24 * 60 * 60 * 1000; // 24h
+        const cutoff = now - 48 * 60 * 60 * 1000; // 48h
         for (let i = 0; i < this.slotCount; i++) {
             const arr = this._history[i];
             // keep only timestamps >= cutoff
@@ -79,11 +79,6 @@ export class Slots {
         else this.slotCaps[slotIndex] = Math.max(0, Math.floor(maxPer24h));
     }
 
-    // --- Helpers to inspect counts in last 24h ---
-    _getCountInLast24h(slotIndex) {
-        this._pruneOldEntries();
-        return (this._history[slotIndex] || []).length;
-    }
     _getAllCounts() {
         this._pruneOldEntries();
         return this._history.map(arr => arr.length);
