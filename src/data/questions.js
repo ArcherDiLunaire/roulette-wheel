@@ -9,17 +9,15 @@ const modal_data = {
                 ],
                 solution: 1,
             },
-
             {
-                question: "¿Qué pasa si comes un yogur pasada la fecha de consumo preferente?",
+                question: "¿Qué es un probiótico?",
                 answers: [
-                    "Puede estar bien si se conserva correctamente",
-                    "Es peligroso"
+                    "Cualquier microorganismo vivo",
+                    "Microorganismos vivos que pueden resultar beneficiosos para la salud de quien los consume"
                 ],
-                solution: 1,
+                solution: 2,
 
             },
-
             {
                 question: "¿Las bacterias siempre son malas?",
                 answers: [
