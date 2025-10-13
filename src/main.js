@@ -6,18 +6,18 @@ import confetti from 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/+esm'
 const wheelTouch = document.querySelector('.wheel-touchzone');
 const wheelElm = wheelTouch.querySelector('#wheel');
 const stickersCap = 500;
-const stickersSlots = [1,3,4,5,6];
+const stickersSlots = [1,2,3,4];
 const productCap = 400;
-const productSlots = [7,8,9];
+const productSlots = [5,7,8];
 const toteCap = 100;
-const toteSlots = [10,11];
+const toteSlots = [9,10];
 const bagCap = 15;
-const bagSlot = 12;
-const tryAgainSlot = 2;
+const bagSlot = 11;
+const tryAgainSlot = [6,12];
 
 let wheel = new Wheel(wheelTouch);
 wheel.slots.setCount(12); // number of slots on your wheel
-wheel.slots.setWeights([1, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
+wheel.slots.setWeights([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5]);
 //stickers
 stickersSlots.forEach(slot => {
     wheel.slots.setSlotCap(slot - 1, stickersCap / stickersSlots.length); // slot index, max selection per 48h
@@ -58,7 +58,7 @@ function setSize(){
 
 function showModal(slot) {
     // Implementation for showing the modal
-    if (slot === tryAgainSlot) {
+    if (tryAgainSlot.includes(slot)) {
         tryAgain();
         wheel.slots.recordSelection(slot - 1); // Record the selection for the unlucky slot
     } else {
@@ -76,23 +76,22 @@ function InsertQuestion(slot) {
     let category;
     switch (slot) {
         case 1:
-        case 3:
-            category = "yogurt";
-            break;
-        case 4:
-        case 8:
-        case 6:
-            category = "sustainability";
-            break;
         case 7:
-        case 5:
-        case 9:
             category = "history";
             break;
-        case 10:
-        case 11:
-        case 12:
+        case 2:
+        case 5:
+        case 8:
             category = "brand";
+            break;
+        case 3:
+        case 9:
+        case 11:
+            category = "sustainability";
+            break;
+        case 4:
+        case 10:
+            category = "yogurt";
             break;
         default:
             category = "brand";
@@ -111,7 +110,7 @@ function InsertQuestion(slot) {
 
     modal.querySelector('.modal-title').src = `./assets/titles/title_1.png`;
     modal.querySelector('.modal-message').innerHTML = `
-        <span class="modal-subtitle">Answer the question</span>
+        <span class="modal-subtitle">${modal_data.copy.answer}</span>
         <p class="modal-question">${questionObj.question}</p>`;
     modal.querySelector('.modal-answers').innerHTML = answersHtml;
 

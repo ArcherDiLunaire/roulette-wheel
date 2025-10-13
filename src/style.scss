@@ -1,3 +1,21 @@
+@font-face {
+    font-family: 'Danone One Cn';
+    src: url('/fonts/DanoneOne-Cn.woff') format('woff'),
+        url('/fonts/DanoneOne-Cn.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Danone One CnBd';
+    src: url('/fonts/DanoneOne-CnBd.woff') format('woff'),
+        url('/fonts/DanoneOne-CnBd.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 html {
     height: 100vh;
     overflow: hidden;
@@ -18,7 +36,7 @@ body {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    font-family: Arial;
+    font-family: "Danone One CnBd";
     overflow: hidden;
 
     .background {
@@ -77,11 +95,12 @@ img {
     max-width: 500px;
     width: 25vh;
     height: 20vh;
+    justify-content: center;
 }
 
 .subtitle {
     font-size: 1.7vh;
-    margin-top: 0;
+    margin: 0;
     text-transform: uppercase;
     text-align: center;
     color: white;
@@ -106,7 +125,7 @@ img {
     max-height: 55vh;
     align-items: center;
     position: relative;
-    overflow: hidden;
+    // overflow: hidden;
     flex: 0 0 auto;
 
     .wheel-touchzone {
@@ -138,8 +157,12 @@ img {
     #shadow {
         pointer-events: none;
         position: absolute;
-        width: 96%;
+        width: 90%;
         height: auto;
+    }
+
+    #shadow {
+        width: 96%;
     }
 
     .arrow {
@@ -149,6 +172,7 @@ img {
         position: absolute;
         width: 9%;
         z-index: 3;
+        transform: translateY(-20px);
     }
 }
 
@@ -404,8 +428,8 @@ $animationSpeed: 40s;
             margin-top: 2vh;
 
             .modal-subtitle {
-                font-size: 1.3vh;
-                font-weight: bold;
+                font-size: 1.4vh;
+                font-family: "Danone One Cn";
                 text-transform: uppercase;
                 opacity: 0.5;
             }
@@ -479,6 +503,7 @@ $animationSpeed: 40s;
             text-transform: uppercase;
             border: none;
             pointer-events: auto;
+            font-family: "Danone One CnBd";
 
             &:active {
                 background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #07ACED;

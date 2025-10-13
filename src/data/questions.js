@@ -13,7 +13,7 @@ const modal_data = {
                 question: "¿Qué es un probiótico?",
                 answers: [
                     "Cualquier microorganismo vivo",
-                    "Microorganismos vivos que pueden resultar beneficiosos para la salud de quien los consume"
+                    "Microorganismos beneficiosos para la salud"
                 ],
                 solution: 2,
 
@@ -411,7 +411,8 @@ const modal_data = {
         prize: "¡Has ganado un producto Danone sorpresa! Dirígete al stand y recógelo.",
         tote: "¡Has ganado unA TOTE BAG DE DANONE! Dirígete al stand y recógela.",
         bag: "¡Has ganado uNA MOCHILA DE DANONE! Dirígete al stand y recógela.",
-        sticker: "¡Has ganado unA PEGATINA DE DANONE! Dirígete al stand y recógela."
+        sticker: "¡Has ganado unA PEGATINA DE DANONE! Dirígete al stand y recógela.",
+        answer: "Responde la pregunta"
     }
 };
 
