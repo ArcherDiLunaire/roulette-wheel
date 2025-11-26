@@ -62,13 +62,26 @@ function closeModal() {
 function InsertQuestion(slot) {
     let category;
     switch (slot) {
+        case 1:
+        case 3:
+            category = "lo_quiero_ahora";
+            break;
+        case 2:
+        case 6:
+            category = "tus_favoritos";
+            break;
         case 4:
         case 7:
             category = "asi_empezo_todo";
             break;
+        case 5:
+        case 8:
+            category = "ponte_al_dia";
+            break;
         default:
             category = "tus_favoritos";
     }
+    console.log("category", category);
     const questions = modal_data.questions[category];
     randomIndex = Math.floor(Math.random() * questions.length);
     const questionObj = questions[randomIndex];
@@ -82,16 +95,14 @@ function InsertQuestion(slot) {
 }
 
 function handleAnswer(e) {
-        const selectedAnswer = parseInt(e.target.getAttribute('data-answer'));
-        if (selectedAnswer === currentQuestion.solution) {
-            wheel.slots.recordSelection(currentSlot - 1); // Record the selection for the correct answer
-            correctAnswer(currentQuestion);
-            console.log("correctAnswer", selectedAnswer);
-        } else {
-            tryAgain(currentQuestion);
-            console.log("tryAgain", selectedAnswer);
-        }
+    const selectedAnswer = parseInt(e.target.getAttribute('data-answer'));
+    if (selectedAnswer === currentQuestion.solution) {
+        wheel.slots.recordSelection(currentSlot - 1); // Record the selection for the correct answer
+        correctAnswer(currentQuestion);
+    } else {
+        tryAgain(currentQuestion);
     }
+}
 
 function clearMessage() {
     modal.querySelector('.modal-container').classList.remove('active');

@@ -9,7 +9,7 @@ export class Wheel {
       this.onGrab(e.clientX, e.clientY);
     });
     window.addEventListener('mousemove', e => {
-      if (e.which == 1)
+      if (e == 1)
         this.onMove(e.clientX, e.clientY);
       else if (!this.isDragging)
         this.onRelease()
@@ -81,7 +81,8 @@ export class Wheel {
     if (this.isDragging) {
       this.isDragging = false;
       let speed = this.lastAngles[0] - this.lastAngles[2];
-      if (Math.abs(speed) < 7) {
+      if (Math.abs(speed) < 7 || Math.abs(this.currentAngle - this.oldAngle) < 50) {
+        console.log(this.currentAngle, this.oldAngle);
         this.animateToTarget(this.currentAngle, this.oldAngle, 500, true);
         return; // Minimum speed to trigger a spin
       }
