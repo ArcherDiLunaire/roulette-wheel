@@ -1,418 +1,253 @@
 const modal_data = {
     questions: {
-        yogurt: [
+        asi_empezo_todo: [
             {
-                question: "¿Qué tipo de bacterias se usan para fermentar el yogur?",
-                answers: [
-                    "Lactobacillus y Streptococcus",
-                    "E. coli y Salmonella"
-                ],
+                question: "¿Burger King® empezó llamándose Insta-Burger King?",
+                answer: "Sí, fundado en 1953 como Insta-Burger King en Jacksonville, Florida.",
+                solution: 2,
+            },
+
+            {
+                question: "¿El primer Burger King® abrió en Miami?",
+                answer: "Sí, el primer restaurante con el nombre Burger King® abrió en Miami en 1954.",
+                solution: 2,
+            },
+
+            {
+                question: "¿El Whopper® nació en los años 90?",
+                answer: "No, se lanzó en 1957.",
                 solution: 1,
             },
-            {
-                question: "¿Qué es un probiótico?",
-                answers: [
-                    "Cualquier microorganismo vivo",
-                    "Microorganismos beneficiosos para la salud"
-                ],
-                solution: 2,
 
-            },
             {
-                question: "¿Las bacterias siempre son malas?",
-                answers: [
-                    "Solo si están en yogur",
-                    "No, algunas son beneficiosas"
-                ],
+                question: "¿Burger King® tiene 50 años de historia en España?",
+                answer: "Sí, este 2025 celebramos nuestro 50º aniversario.",
+                solution: 2,
+            },
+
+            {
+                question: "¿Burger King® empezó vendiendo solo hamburguesas y patatas?",
+                answer: "Sí, inicialmente solo hamburguesas y patatas.",
+                solution: 2,
+            },
+
+            {
+                question: "¿El logo actual es una reinterpretación de uno del pasado?",
+                answer: "Sí, inspirado en el lanzado en 1969.",
+                solution: 2,
+            },
+
+            {
+                question: "¿El King siempre ha sido la mascota de Burger King®?",
+                answer: "No, el “King” apareció en los 70.",
+                solution: 1,
+            },
+
+            {
+                question: "¿Burger King® nació en Europa?",
+                answer: "No, nació en EE. UU.",
+                solution: 1,
+            },
+
+            {
+                question: "¿Burger King® tiene más de 10.000 restaurantes en el mundo?",
+                answer: "Sí, más de 19.000.",
+                solution: 2,
+            },
+
+            {
+                question: "¿Burger King® empezó con parrilla desde el primer día?",
+                answer: "Sí, la parrilla siempre ha sido nuestro sello de identidad.",
+                solution: 2,
+            },
+
+            {
+                question: "¿El primer restaurante de España abrió en Barcelona?",
+                answer: "No, el primero abrió en Madrid en la Plaza de los Cubos.",
+                solution: 1,
+            },
+        ],
+
+
+
+        tus_favoritos: [
+
+            {
+                question: "¿La lechuga y el tomate del Whopper® son de huerta?",
+                answer: "Sí, concretamente de la huerta murciana. Súper frescos.",
+                solution: 2,
+            },
+
+            {
+                question: "¿El Whopper® lleva pepinillos?",
+                answer: "Sí, forma parte de la receta clásica.",
+                solution: 2,
+            },
+
+            {
+                question: "¿La Krispper es una hamburguesa de pollo?",
+                answer: "Sí, pollo crujiente por fuera, sabor asado por dentro.",
+                solution: 2,
+            },
+
+            {
+                question: "¿Burger King® vende helados?",
+                answer: "Sí, acaba de lanzar su nuevo King Fusion™ Dubai.",
+                solution: 2,
+            },
+
+            {
+                question: "¿Tenemos una hamburguesa llamada Steakhouse?",
+                answer: "Sí, y está buenísima.",
+                solution: 2,
+            },
+
+            {
+                question: "¿El Whopper® lleva bacon y queso?",
+                answer: "No, pero lo puedes añadir.",
+                solution: 1,
+            },
+
+            {
+                question: "¿El King Fusion™ es un menú?",
+                answer: "No, es un helado con muchos toppings, y está buenísimo.",
+                solution: 1,
+            },
+
+            {
+                question: "¿El Whopper® lleva salsa barbacoa?",
+                answer: "No, lleva mayonesa y ketchup.",
+                solution: 1,
+            },
+
+            {
+                question: "¿El menú infantil se llama King Jr. ®?",
+                answer: "Sí, y viene con juguetes muy molones.",
+                solution: 2,
+            },
+
+            {
+                question: "¿El Whopper® se cocina a la plancha?",
+                answer: "No, se cocina a la parrilla.",
+                solution: 1,
+            },
+
+        ],
+
+
+        lo_quiero_ahora: [
+
+            {
+                question: "¿Burger King® tiene app para pedir a domicilio?",
+                answer: "Sí, y acumulas coronas con cada pedido.",
+                solution: 2,
+            },
+
+            {
+                question: "¿Puedes personalizar tu pedido en la app?",
+                answer: "Sí, añadir o quitar ingredientes. A tu manera.",
+                solution: 2,
+            },
+
+            {
+                question: "¿Puedes recoger tu pedido Burger King® sin hacer cola?",
+                answer: "Sí, desde nuestra app, con Click & Collect.",
+                solution: 2,
+            },
+
+            {
+                question: "¿Burger King® tiene drive-thru?",
+                answer: "Sí, y se llama AutoKing.",
+                solution: 2,
+            },
+
+            {
+                question: "¿Burger King® acepta pago con Bizum?",
+                answer: "Sí, somos muy de ponértelo fácil.",
+                solution: 2,
+            },
+
+            {
+                question: "¿Burger King® tiene pantallas digitales en sus locales?",
+                answer: "Sí, para pedidos rápidos.",
+                solution: 2,
+            },
+
+            {
+                question: "¿Burger King® tiene ofertas especiales en la app?",
+                answer: "Sí, regístrate en su programa de fidelización MyBurgerKing para disfrutarlas.",
+                solution: 2,
+            },
+
+            {
+                question: "¿Burger King® tiene robots que cocinan hamburguesas?",
+                answer: "No, lo hacemos con nuestras manos y siempre a la parrilla.",
+                solution: 1,
+            },
+
+            {
+                question: "¿Con My Burger King acumulas coronas?",
+                answer: "Sí, y puedes canjearlas por productos y ofertas exclusivas.",
+                solution: 2,
+            },
+
+        ],
+
+
+        ponte_al_dia: [
+
+            {
+                question: "¿DjMariio participó en el Grand King?",
+                answer: "Sí, y lo ganó!",
+                solution: 2,
+            },
+
+            {
+                question: "¿Lola Lolita ganó el Grand King de verano?",
+                answer: "No, lo ganó DjMariio en una batalla épica.",
+                solution: 1,
+            },
+
+            {
+                question: "¿Illo Juan es el Mystery King?",
+                answer: "Sí, nuestro BrujIllo Juan, y tiene cartas para descubrir tu futuro.",
+                solution: 2,
+            },
+
+            {
+                question: "¿Roro ha participado en alguna campaña de Burger King®?",
+                answer: "Sí, en la del Grand King.",
+                solution: 2,
+            },
+
+            {
+                question: "¿Ceci Army ha participado en alguna campaña de Burger King®?",
+                answer: "Sí, en la del Grand King.",
+                solution: 2,
+            },
+
+            {
+                question: "¿Esperanza Gracia tiene un menú en Burger King®?",
+                answer: "No, pero ha hecho un cameo en Mystery King con BrujIllo Juan.",
+                solution: 1,
+            },
+
+            {
+                question: "¿Burger King® ha lanzado campañas en TikTok?",
+                answer: "Sí, es una de nuestras plataformas favoritas.",
+                solution: 2,
+            },
+
+            {
+                question: "¿Dabiz Muñoz ha colaborado con Burger King®?",
+                answer: "Sí, Con dos colecciones y varias recetas.",
                 solution: 2,
             },
         ],
-        sustainability: [
-
-            {
-                question: "¿Qué compromiso tiene Danone con el medio ambiente?",
-                answers: [
-                    "Reducir el plástico en 10 años",
-                    "Ser neutros en carbono para 2050"
-                ],
-                solution: 2,
-
-            },
-
-            {
-                question: "¿Qué significa ser B Corp?",
-                answers: [
-                    "Cumplir con altos estándares sociales y ambientales",
-                    "Ser una empresa con sede internacional"
-                ],
-                solution: 1,
-            },
-
-            {
-                question: "¿Qué representa “One Planet. One Health” ?",
-                answers: [
-                    "La conexión entre salud humana y salud del planeta",
-                    "Una línea de productos"
-                ],
-                solution: 1,
-
-            },
-
-            {
-                question: "¿Qué acción sostenible realiza Danone?",
-                answers: [
-                    "Invierte en combustibles fósiles.",
-                    "Promueve la agricultura regenerativa."
-                ],
-                solution: 2,
-
-            },
-
-            {
-                question: "¿Qué significa “agricultura regenerativa”?",
-                answers: [
-                    "Cultivar en laboratorio",
-                    "Mejorar la salud del suelo y biodiversidad"
-                ],
-                solution: 2,
-
-            },
-
-            {
-                question: "¿Qué compromiso tiene Danone con el reciclaje?",
-                answers: [
-                    "Más del 80% de sus envases son reciclables",
-                    "Solo los envases de agua"
-                ],
-                solution: 1,
-
-            },
-
-            {
-                question: "¿Qué iniciativa sostenible promueve Danone en sus cadenas de suministro?",
-                answers: [
-                    "Agricultura regenerativa",
-                    "Producción intensiva"
-                ],
-                solution: 1,
-
-            },
-
-            {
-                question: "¿Qué porcentaje de envases de Danone son reciclables?",
-                answers: [
-                    "Más del 80%",
-                    "Menos del 30%"
-                ],
-                solution: 1,
-
-            },
-
-            {
-                question: "¿Qué acción realiza Danone para reducir su huella de carbono?",
-                answers: [
-                    "Aumento de transporte aéreo",
-                    "Uso de energías renovables"
-                ],
-                solution: 2,
-
-            },
-            {
-                question: "¿Qué compromiso tiene Danone con la biodiversidad?",
-                answers: [
-                    "Protección de ecosistemas agrícolas",
-                    "Monocultivo intensivo"
-                ],
-                solution: 1,
-
-            },
-
-        ],
-        history: [
-
-            {
-                question: "¿En qué ciudad se fundó la primera fábrica de Danone?",
-                answers: [
-                    "París",
-                    "Barcelona"
-                ],
-                solution: 2,
-
-            },
-
-            {
-                question: "¿Qué significa el nombre 'Danone'?",
-                answers: [
-                    "Nombre de un yogur",
-                    "Apodo del hijo del fundador"
-                ],
-                solution: 2,
-
-            },
-
-            {
-                question: "¿Cuántas personas trabajan en Danone a nivel global?",
-                answers: [
-                    "Más de 100.000",
-                    "Menos de 100.000"
-                ],
-                solution: 1,
-
-            },
-
-            {
-                question: "¿En qué país nació Danone?",
-                answers: [
-                    "España",
-                    "Italia"
-                ],
-                solution: 1,
-
-            },
-
-            {
-                question: "¿En qué año se fundó Danone?",
-                answers: [
-                    "1919",
-                    "1980"
-                ],
-                solution: 1,
-
-            },
-
-            {
-                question: "¿Cuál fue el primer producto de Danone?",
-                answers: [
-                    "Bebida vegetal",
-                    "Yogur"
-                ],
-                solution: 2,
-
-            },
-
-            {
-                question: "¿En qué ciudad se fundó Danone?",
-                answers: [
-                    "Barcelona",
-                    "Madrid"
-                ],
-                solution: 1,
-
-            },
-
-            {
-                question: "¿Qué inspiró la creación del primer yogur Danone?",
-                answers: [
-                    "Mejorar la salud intestinal infantil",
-                    "Aumentar la producción láctea"
-                ],
-                solution: 1,
-
-            },
-
-            {
-                question: "¿Qué distingue a Danone en el sector alimentario?",
-                answers: [
-                    "Compromiso con salud y sostenibilidad",
-                    "Falta de innovación"
-                ],
-                solution: 1,
-
-            }
-        ],
-        brand: [
-
-            {
-                question: "¿Qué producto de Danone está enfocado en la salud digestiva?",
-                answers: [
-                    "Danonino",
-                    "Activia"
-                ],
-                solution: 2,
-
-            },
-
-            {
-                question: "¿Qué bebida vegetal forma parte del portafolio de Danone?",
-                answers: [
-                    "Alpro",
-                    "Densia"
-                ],
-                solution: 1,
-
-            },
-
-            {
-                question: "¿Qué marca de agua pertenece a Danone?",
-                answers: [
-                    "Font Vella",
-                    "Activia"
-                ],
-                solution: 1,
-
-            },
-
-            {
-                question: "¿Qué producto está pensado para niños?",
-                answers: [
-                    "Densia",
-                    "Danonino"
-                ],
-                solution: 2,
-
-            },
-
-            {
-                question: "¿Qué producto de Danone está enriquecido con calcio y vitamina D?",
-                answers: [
-                    "Actimel",
-                    "Danonino"
-                ],
-                solution: 1,
-
-            },
-
-            {
-                question: "¿Qué línea de productos de Danone está pensada para bebés?",
-                answers: [
-                    "Nutricia",
-                    "Alpro"
-                ],
-                solution: 1,
-
-            },
-
-            {
-                question: "¿Qué marca de Danone se asocia con bienestar intestinal?",
-                answers: [
-                    "Font Vella",
-                    "Activia"
-                ],
-                solution: 2,
-
-            },
-
-            {
-                question: "¿Qué producto de Danone se consume principalmente como snack infantil?",
-                answers: [
-                    "Danonino",
-                    "Activia"
-                ],
-                solution: 1,
-
-            },
-
-            {
-                question: "¿Qué marca de Danone ofrece opciones sin lactosa?",
-                answers: [
-                    "Densia",
-                    "Alpro"
-                ],
-                solution: 2,
-
-            },
-
-            {
-                question: "¿Qué producto de Danone se presenta en formato bebible y vegetal?",
-                answers: [
-                    "Alpro",
-                    "Densia"
-                ],
-                solution: 1,
-
-            },
-
-            {
-                question: "¿Qué es Actimel?",
-                answers: [
-                    "Leche fermentada pasteurizada después de la fermentación",
-                    "Leche fermentada con L. Casei, enriquecida con vitaminas y minerales"
-                ],
-                solution: 2,
-
-            },
-
-
-            {
-                question: "¿Qué es el Skyr?",
-                answers: [
-                    "Derivado del kéfir",
-                    "Producto islandés con alto contenido en proteínas"
-                ],
-                solution: 2,
-
-            },
-
-
-            {
-                question: "¿Qué significa el nombre Alpro?",
-                answers: [
-                    "Aseptic Lipid Proteins",
-                    "Soja en holandés"
-                ],
-                solution: 1,
-
-            },
-
-
-            {
-                question: "¿Cuál es el principal beneficio nutricional de los productos YoPRO?",
-                answers: [
-                    "Enriquecido con hierro",
-                    "Alto contenido en proteínas"
-                ],
-                solution: 2,
-
-            },
-
-            {
-                question: "¿Cuántos gramos de proteína contiene un YoPRO de 250 ml?",
-                answers: [
-                    "15 g o 25 g, según variedad",
-                    "10 g"
-                ],
-                solution: 1,
-
-            },
-
-            {
-                question: "¿Qué tipo de ingredientes utiliza Alpro en sus productos?",
-                answers: [
-                    "Ingredientes 100% vegetales y naturales",
-                    "Solo frutas"
-                ],
-                solution: 1,
-
-            },
-
-            {
-                question: "¿Qué porcentaje del negocio de Danone está enfocado en categorías saludables?",
-                answers: [
-                    "Exactamente el 50%",
-                    "Más del 60%"
-                ],
-                solution: 2,
-
-            },
-
-            {
-                question: "¿Qué tipo de productos forman parte del portafolio de Danone?",
-                answers: [
-                    "Refrescos, snacks y cereales",
-                    "Lácteos, vegetales, aguas y nutrición especializada"
-                ],
-                solution: 2,
-
-            }
-        ]
     },
     copy: {
-        incorrect: "¡Esta vez no pudo ser, pero seguro que a la próxima la suerte estará contigo!",
-        prize: "¡Has ganado un producto Danone sorpresa! Dirígete al stand y recógelo.",
-        tote: "¡Has ganado unA TOTE BAG DE DANONE! Dirígete al stand y recógela.",
-        bag: "¡Has ganado uNA MOCHILA DE DANONE! Dirígete al stand y recógela.",
-        sticker: "¡Has ganado unA PEGATINA DE DANONE! Dirígete al stand y recógela.",
-        answer: "Responde la pregunta"
+        incorrect: "Intentalo otra vez",
+        correct: "Recoge tu premio en la barra central."
     }
 };
 

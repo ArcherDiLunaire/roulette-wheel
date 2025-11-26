@@ -1,37 +1,23 @@
 import './style.scss'
 import { Wheel } from './wheel.js'
 import modal_data from './data/questions.js';
-import confetti from 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/+esm'
+import confetti from 'canvas-confetti';
+
 
 const wheelTouch = document.querySelector('.wheel-touchzone');
 const wheelElm = wheelTouch.querySelector('#wheel');
-const stickersCap = 500;
-const stickersSlots = [1,2,3,4];
-const productCap = 400;
-const productSlots = [5,7,8];
-const toteCap = 100;
-const toteSlots = [9,10];
-const bagCap = 15;
-const bagSlot = 11;
-const tryAgainSlot = [6,12];
+const slotAmount = 8;
+const slotCap = 600;
+let currentQuestion = {};
+let currentSlot;
+
 
 let wheel = new Wheel(wheelTouch);
-wheel.slots.setCount(12); // number of slots on your wheel
-wheel.slots.setWeights([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5]);
-//stickers
-stickersSlots.forEach(slot => {
-    wheel.slots.setSlotCap(slot - 1, stickersCap / stickersSlots.length); // slot index, max selection per 48h
-});
-//products
-productSlots.forEach(slot => {
-    wheel.slots.setSlotCap(slot - 1, productCap / productSlots.length); // slot index, max selection per 48h
-});
-// tote
-toteSlots.forEach(slot => {
-    wheel.slots.setSlotCap(slot - 1, toteCap / toteSlots.length); // slot index, max selection per 48h
-});
-//bag
-wheel.slots.setSlotCap(bagSlot - 1, 0) //slot is unavailable until activated
+wheel.slots.setCount(slotAmount); // number of slots on your wheel
+wheel.slots.setWeights([1, 1, 1, 1, 1, 1, 1, 1]); // weights for each slot (affects probability)
+for (let slot = 1; slot <= slotAmount; slot++) {
+    wheel.slots.setSlotCap(slot - 1, slotCap / slotAmount); // per-slot cap (null = no cap)
+};
 
 const modal = document.getElementById('modal');
 let randomIndex = 0;
@@ -48,121 +34,101 @@ wheelElm.addEventListener('wheelStop', (e) => {
     showModal(e.detail.slot);
 });
 
-document.querySelector(".count-btn").addEventListener('click', updateCap);
+// document.querySelector(".count-btn").addEventListener('click', updateCap);
 
 document.querySelector('.modal-close').addEventListener('click', closeModal);
 
-function setSize(){
+// Update answer buttons
+modal.querySelectorAll('.answer-button').forEach(button => {
+    button.addEventListener('click', handleAnswer);
+});
+
+function setSize() {
     size = window.innerHeight / 800;
 }
 
 function showModal(slot) {
-    // Implementation for showing the modal
-    if (tryAgainSlot.includes(slot)) {
-        tryAgain();
-        wheel.slots.recordSelection(slot - 1); // Record the selection for the unlucky slot
-    } else {
-        InsertQuestion(slot);
-        modal.querySelector('.modal-container').classList.add('active');
-    }
+    InsertQuestion(slot);
+    modal.querySelector('.modal-container').classList.add('active');
     modal.classList.add('isVisible');
 }
 
 function closeModal() {
     modal.classList.remove('isVisible');
+    document.querySelector('.logo_title').src = './assets/Logos/logo.png';
+    clearMessage();
 }
 
 function InsertQuestion(slot) {
     let category;
     switch (slot) {
         case 1:
-        case 7:
-            category = "history";
+        case 3:
+            category = "lo_quiero_ahora";
             break;
         case 2:
-        case 5:
-        case 8:
-            category = "brand";
-            break;
-        case 3:
-        case 9:
-        case 11:
-            category = "sustainability";
+        case 6:
+            category = "tus_favoritos";
             break;
         case 4:
-        case 10:
-            category = "yogurt";
+        case 7:
+            category = "asi_empezo_todo";
+            break;
+        case 5:
+        case 8:
+            category = "ponte_al_dia";
             break;
         default:
-            category = "brand";
+            category = "tus_favoritos";
     }
+    console.log("category", category);
     const questions = modal_data.questions[category];
     randomIndex = Math.floor(Math.random() * questions.length);
     const questionObj = questions[randomIndex];
 
     clearMessage();
     modal.querySelector('.modal-message').style.display = 'block';
+    modal.querySelector('.modal-answers').style.display = 'flex';
+    modal.querySelector('.modal-message').innerHTML = `<p class="modal-question">${questionObj.question}</p>`;
+    currentQuestion = questionObj;
+    currentSlot = slot;
+}
 
-    let answersHtml = '';
-    questionObj.answers.forEach((answer, index) => {
-        answersHtml += `<button class="answer-button" data-answer="${index + 1}">${answer}</button>`;
-    });
-
-    modal.querySelector('.modal-title').src = `./assets/titles/title_1.png`;
-    modal.querySelector('.modal-message').innerHTML = `
-        <span class="modal-subtitle">${modal_data.copy.answer}</span>
-        <p class="modal-question">${questionObj.question}</p>`;
-    modal.querySelector('.modal-answers').innerHTML = answersHtml;
-
-    // Add event listeners to answer buttons
-    modal.querySelectorAll('.answer-button').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const selectedAnswer = parseInt(e.target.getAttribute('data-answer'));
-            if (selectedAnswer === questionObj.solution) {
-                wheel.slots.recordSelection(slot - 1); // Record the selection for the correct answer
-                correctAnswer(slot);
-            } else {
-                tryAgain();
-            }
-        });
-    });
+function handleAnswer(e) {
+    const selectedAnswer = parseInt(e.target.getAttribute('data-answer'));
+    if (selectedAnswer === currentQuestion.solution) {
+        wheel.slots.recordSelection(currentSlot - 1); // Record the selection for the correct answer
+        correctAnswer(currentQuestion);
+    } else {
+        tryAgain(currentQuestion);
+    }
 }
 
 function clearMessage() {
     modal.querySelector('.modal-container').classList.remove('active');
     modal.querySelector('.modal-container').classList.remove('shake');
-    modal.querySelector('.modal-title').src = ``;
     modal.querySelector('.modal-message').style.display = 'none';
     modal.querySelector('.modal-wrapper').style.display = 'none';
-    modal.querySelector('.modal-answers').innerHTML = ``;
+    modal.querySelector('.modal-answers').style.display = 'none';
+    modal.querySelector('.modal-qr').src = '';
+    modal.querySelector('.modal-qr').style.display = 'none';
+    modal.querySelector('.modal-response').innerHTML = '';
+    modal.classList.remove('correct');
+    modal.classList.remove('incorrect');
 }
 
-function correctAnswer(slot) {
+function correctAnswer(q) {
     clearMessage();
-    let prize;
-    let text;
-    switch (true) {
-        case bagSlot === slot:
-            prize = `./assets/answers/answer_bag.png`;
-            text = "bag";
-            break;
-        case toteSlots.includes(slot):
-            prize = `./assets/answers/answer_tote.png`;
-            text = "tote";
-            break;
-        case productSlots.includes(slot):
-            prize = `./assets/answers/answer_prize.png`;
-            text = "prize";
-            break;
-        default:
-            prize = `./assets/answers/answer_sticker.png`;
-            text = "sticker";
-    }
+    modal.classList.add('correct');
     modal.querySelector('.modal-wrapper').style.display = 'flex';
-    modal.querySelector('.modal-title').src = `./assets/titles/title_3.png`;
-    modal.querySelector('.modal-prize').src = prize;
-    modal.querySelector('.modal-text').innerHTML = modal_data.copy[text];
-
+    modal.querySelector('.modal-prize').src = `./assets/Icons/correct.png`;
+    modal.querySelector('#icon-1').src = `./assets/Icons/icon-correct-1.png`;
+    modal.querySelector('#icon-2').src = `./assets/Icons/icon-correct-2.png`;
+    document.querySelector('.logo_title').src = './assets/Logos/logo_white.png';
+    modal.querySelector('.modal-text').innerHTML = modal_data.copy.correct;
+    modal.querySelector('.modal-response').innerHTML = "respuesta: <br>" + q.answer;
+    modal.querySelector('.modal-qr').src = './assets/qr.jpg';
+    modal.querySelector('.modal-qr').style.display = 'block';
     setTimeout(() => {
         confetti({
             particleCount: 200,
@@ -170,26 +136,29 @@ function correctAnswer(slot) {
             spread: 360,
             startVelocity: 35 * size,
             origin: { y: 0.5 },
-            // colors: ['FFE400', 'FFBD00', 'E89400', 'FFCA6C', 'FDFFB8']
-            colors: ['FFE400', 'FFBD00', 'E89400', 'FFCA6C', 'FDFFB8']
+            colors: ['ff8732', 'ffaa00']
         });
         modal.querySelector('.modal-container').classList.add('active');
     }, 100)
 }
 
-function tryAgain() {
+function tryAgain(q) {
     clearMessage();
+    modal.classList.add('incorrect');
     modal.querySelector('.modal-wrapper').style.display = 'flex';
-    modal.querySelector('.modal-title').src = `./assets/titles/title_2.png`;
-    modal.querySelector('.modal-prize').src = `./assets/answers/answer_wrong.png`;
+    modal.querySelector('.modal-prize').src = `./assets/Icons/incorrect.png`;
+    modal.querySelector('#icon-1').src = `./assets/Icons/icon-incorrect-1.png`;
+    modal.querySelector('#icon-2').src = `./assets/Icons/icon-incorrect-2.png`;
+    document.querySelector('.logo_title').src = './assets/Logos/logo_white.png';
     modal.querySelector('.modal-text').innerHTML = modal_data.copy.incorrect;
+    modal.querySelector('.modal-response').innerHTML = "respuesta: <br>" + q.answer;
     setTimeout(() => {
         modal.querySelector('.modal-container').classList.add('shake');
     }, 100)
 }
 
-function updateCap(e){
-    if(e.currentTarget.classList.contains("isActive")){
+function updateCap(e) {
+    if (e.currentTarget.classList.contains("isActive")) {
         e.currentTarget.classList.remove("isActive");
         wheel.slots.setSlotCap(bagSlot - 1, 0);
     } else {
