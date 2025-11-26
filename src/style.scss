@@ -1,16 +1,16 @@
 @font-face {
-    font-family: 'Danone One Cn';
-    src: url('/fonts/DanoneOne-Cn.woff') format('woff'),
-        url('/fonts/DanoneOne-Cn.ttf') format('truetype');
+    font-family: 'Flame_Regular';
+    src: url('/fonts/Flame_Regular.woff') format('woff'),
+        url('/fonts/Flame_Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'Danone One CnBd';
-    src: url('/fonts/DanoneOne-CnBd.woff') format('woff'),
-        url('/fonts/DanoneOne-CnBd.ttf') format('truetype');
+    font-family: 'Flame_Bold';
+    src: url('/fonts/Flame_Bold.woff') format('woff'),
+        url('/fonts/Flame_Bold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -36,15 +36,13 @@ body {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    font-family: "Danone One CnBd";
+    font-family: "Flame_Regular", sans-serif;
     overflow: hidden;
+    color: #502314;
 
     .background {
         position: absolute;
-        background-color: rgba(1, 94, 184, 1);
-        background-image: url('/assets/background.png');
-        background-size: cover;
-        background-position: center;
+        background-color: #f5ebdc;
         height: 100%;
         width: 100%;
         z-index: -1;
@@ -90,20 +88,25 @@ img {
     margin: 20px;
     text-align: center;
     display: flex;
-    gap: 2vh;
+    gap: 4vh;
     flex-direction: column;
-    max-width: 500px;
+    max-width: 550px;
     width: 25vh;
-    height: 20vh;
-    justify-content: center;
+    height: 15vh;
+    justify-content: flex-end;
+}
+
+.logo_title {
+    z-index: 12;
 }
 
 .subtitle {
-    font-size: 1.7vh;
+    font-family: "Flame_Bold", sans-serif;
+    font-size: 3vh;
+    line-height: 3.2vh;
     margin: 0;
     text-transform: uppercase;
     text-align: center;
-    color: white;
 }
 
 #debug {
@@ -162,7 +165,8 @@ img {
     }
 
     #shadow {
-        width: 96%;
+        width: 100%;
+        opacity: 0.3;
     }
 
     .arrow {
@@ -170,9 +174,9 @@ img {
         left: 0;
         right: 0;
         position: absolute;
-        width: 9%;
+        width: 6%;
         z-index: 3;
-        transform: translateY(-20px);
+        transform: translateY(-35px);
     }
 }
 
@@ -211,53 +215,68 @@ $animationSpeed: 40s;
     }
 }
 
-.carousel {
-    width: 100%;
+.footer {
     height: 15vh;
     display: flex;
-    align-items: center;
-
-    .carousel-inner {
-        will-change: transform;
-        animation: scroll $animationSpeed linear infinite;
-        display: flex;
-        min-width: calc(14vh * 12);
-        justify-content: space-evenly;
-        align-items: center;
-    }
-
-    @for $i from 0 through 12 {
-        .carousel-item:nth-child(#{$i}n) {
-            will-change: transform;
-            animation: wiggle 0.7s linear infinite;
-            animation-delay: #{$i * 0.1}s;
-        }
-    }
+    align-items: flex-start;
+    justify-content: center;
+    font-size: 2.7vh;
+    line-height: 3vh;
+    text-align: center;
+    width: 60vw;
+    font-family: "Flame_Bold", sans-serif;
+    text-transform: uppercase;
 }
 
-.bubble {
+.floater {
     position: absolute;
-    bottom: 15vh;
-    left: 5vw;
-    width: 40vw;
-    max-width: 30vh;
-    z-index: 5;
+    width: 12vh;
+    height: auto;
+    will-change: transform;
+    animation: wiggle 0.5s linear infinite;
+    z-index: 3;
+    pointer-events: none;
 
-    .bubble-text {
-        position: absolute;
-        top: 10%;
-        left: 10%;
-        width: 80%;
-        height: 60%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        font-size: clamp(13px, 3vw, 1.7vh);
-        color: black;
-        pointer-events: none;
-        font-weight: bold;
-        text-transform: uppercase;
+    &#fire {
+        bottom: 1vh;
+        left: 4vw;
+        animation-delay: 0s;
+    }
+
+    &#heart {
+        right: 6vw;
+        top: 1vh;
+        animation-delay: 0.2s;
+    }
+
+    &#prize {
+        right: 12vw;
+        bottom: 18vh;
+        animation-delay: 0.4s;
+    }
+
+    &#star {
+        right: 12vw;
+        bottom: 18vh;
+        animation-delay: 0.4s;
+    }
+
+    &#icecream {
+        left: 12vw;
+        bottom: 9vh;
+        animation-delay: 0.4s;
+    }
+
+    &#crown {
+        right: 20vw;
+        top: 18vh;
+        animation-delay: 0.4s;
+    }
+
+    &#cloud {
+        left: 6vw;
+        top: 1vh;
+        animation-delay: 0.4s;
     }
 }
 
@@ -269,8 +288,7 @@ $animationSpeed: 40s;
     left: 0;
     margin: 0 auto;
     pointer-events: auto;
-    background-color: rgba(0, 10, 31, 0.6);
-    backdrop-filter: blur(20px);
+    background-color: #f5ebdc;
     z-index: 10;
     display: flex;
     flex-direction: column;
@@ -283,11 +301,6 @@ $animationSpeed: 40s;
 
         .modal-container.active {
             animation: fadeInUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
-        .modal-close {
-            will-change: transform;
-            animation: bounce1 0.4s cubic-bezier(0.48, 0.56, 0.21, 1.45) 0.1s forwards;
         }
 
         .modal-title {
@@ -330,10 +343,12 @@ $animationSpeed: 40s;
 
     @keyframes bounce1 {
         0% {
+            opacity: 0;
             transform: translateY(100px);
         }
 
         100% {
+            opacity: 1;
             transform: translateY(0);
         }
     }
@@ -348,48 +363,30 @@ $animationSpeed: 40s;
         }
     }
 
-    @keyframes bounce2 {
-        0% {
-            transform: translateY(0);
-        }
-
-        100% {
-            transform: translateY(-66%);
-        }
+    .modal-close {
+        position: absolute;
+        top: 1vh;
+        right: 1vw;
+        align-self: flex-end;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: white;
+        height: 5vh;
+        width: 5vh;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40px' height='40px' viewbox='0 0 40 40'%3E%3Cpath d='M 10,10 L 30,30 M 30,10 L 10,30' stroke='rgb(255,170,0)' stroke-width='4' stroke-linecap='butt' /%3E%3C/svg%3E");
+        background-size: 100%;
     }
 
     .modal-container {
         will-change: transform opacity;
         opacity: 0;
         transform: translateY(500px);
-        border-radius: 2.2vh;
-        background: #FFF;
-        color: black;
-        width: 92vw;
-        max-width: 55vh;
-        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25), 0 16px 32px -8px rgba(0, 0, 0, 0.20);
-        display: flex;
-        flex-direction: column;
         position: relative;
 
         &.shake {
             animation: wiggle 0.2s ease-in-out forwards;
             opacity: 1;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: -3.5vh;
-            right: 0;
-            align-self: flex-end;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: white;
-            height: 3vh;
-            width: 3vh;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40px' height='40px' viewbox='0 0 40 40'%3E%3Cpath d='M 10,10 L 30,30 M 30,10 L 10,30' stroke='white' stroke-width='4' stroke-linecap='butt' /%3E%3C/svg%3E");
-            background-size: 100%;
         }
 
         .modal-content {
@@ -425,21 +422,13 @@ $animationSpeed: 40s;
         }
 
         .modal-message {
-            margin-top: 2vh;
-
-            .modal-subtitle {
-                font-size: 1.4vh;
-                font-family: "Danone One Cn";
-                text-transform: uppercase;
-                opacity: 0.5;
-            }
-
             .modal-question {
-                font-size: 2.5vh;
-                line-height: 3vh;
-                font-weight: bold;
+                font-size: 3.7vh;
+                line-height: 4vh;
+                font-family: "Flame_Bold", sans-serif;
                 text-transform: uppercase;
                 margin: 1.5vh 0 1vh 0;
+                text-align: center;
             }
         }
 
@@ -475,39 +464,50 @@ $animationSpeed: 40s;
         max-width: 55vh;
         align-items: flex-start;
         align-content: flex-start;
-        gap: 2vh;
+        gap: 4vh;
         flex-wrap: wrap;
         margin-top: 2vh;
+        justify-content: center;
 
         .answer-button {
             transform: scale(0);
         }
 
+        .answer-button:nth-child(1) {
+            background: #d62300;
+
+            &:active {
+                background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #ae2c12;
+            }
+        }
+
+        .answer-button:nth-child(2) {
+            background: #198737;
+
+            &:active {
+                background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #157930;
+            }
+        }
+
         button {
             display: flex;
-            flex: 1;
-            padding: 1.5vh 3vh;
+            padding: 2.2vh 2vh;
+            width: 155px;
             justify-content: center;
             align-items: center;
             flex-shrink: 0;
-            width: 100%;
             border-radius: 200px;
-            background: #07ACED;
             box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25), 0 16px 32px -8px rgba(0, 0, 0, 0.20);
-            color: #FFF;
+            color: #f5ebdc;
             text-align: center;
-            font-size: 1.7vh;
+            font-size: 2.5vh;
             font-style: normal;
             font-weight: 700;
             line-height: 130%;
             text-transform: uppercase;
             border: none;
             pointer-events: auto;
-            font-family: "Danone One CnBd";
-
-            &:active {
-                background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #07ACED;
-            }
+            font-family: "Flame_Regular", sans-serif;
         }
     }
 }
