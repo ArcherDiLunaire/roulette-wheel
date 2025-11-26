@@ -9,7 +9,7 @@ export class Wheel {
       this.onGrab(e.clientX, e.clientY);
     });
     window.addEventListener('mousemove', e => {
-      if (e == 1)
+      if (e.which == 1)
         this.onMove(e.clientX, e.clientY);
       else if (!this.isDragging)
         this.onRelease()
