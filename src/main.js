@@ -1,7 +1,9 @@
 import './style.scss'
 import { Wheel } from './wheel.js'
 import modal_data from './data/questions.js';
-import confetti from 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/+esm'
+// import confetti from 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/+esm'
+import confetti from 'canvas-confetti';
+
 
 const wheelTouch = document.querySelector('.wheel-touchzone');
 const wheelElm = wheelTouch.querySelector('#wheel');
@@ -21,7 +23,7 @@ let randomIndex = 0;
 let size;
 setSize();
 
-// clearMessage();
+clearMessage();
 
 window.addEventListener('resize', setSize);
 
@@ -46,31 +48,19 @@ function showModal(slot) {
 
 function closeModal() {
     modal.classList.remove('isVisible');
+    document.querySelector('.logo_title').src = './assets/Logos/logo.png';
+    clearMessage();
 }
 
 function InsertQuestion(slot) {
     let category;
     switch (slot) {
-        case 1:
-        case 7:
-            category = "history";
-            break;
-        case 2:
-        case 5:
-        case 8:
-            category = "brand";
-            break;
-        case 3:
-        case 9:
-        case 11:
-            category = "sustainability";
-            break;
         case 4:
-        case 10:
-            category = "yogurt";
+        case 7:
+            category = "asi_empezo_todo";
             break;
         default:
-            category = "brand";
+            category = "tus_favoritos";
     }
     const questions = modal_data.questions[category];
     randomIndex = Math.floor(Math.random() * questions.length);
@@ -78,15 +68,8 @@ function InsertQuestion(slot) {
 
     clearMessage();
     modal.querySelector('.modal-message').style.display = 'block';
-
-    let answersHtml = '';
-    questionObj.answers.forEach((answer, index) => {
-        answersHtml += `<button class="answer-button" data-answer="${index + 1}">${answer}</button>`;
-    });
-
-    modal.querySelector('.modal-message').innerHTML = `
-        <p class="modal-question">${questionObj.question}</p>`;
-    modal.querySelector('.modal-answers').innerHTML = answersHtml;
+    modal.querySelector('.modal-answers').style.display = 'flex';
+    modal.querySelector('.modal-message').innerHTML = `<p class="modal-question">${questionObj.question}</p>`;
 
     // Add event listeners to answer buttons
     modal.querySelectorAll('.answer-button').forEach(button => {
@@ -94,9 +77,11 @@ function InsertQuestion(slot) {
             const selectedAnswer = parseInt(e.target.getAttribute('data-answer'));
             if (selectedAnswer === questionObj.solution) {
                 wheel.slots.recordSelection(slot - 1); // Record the selection for the correct answer
-                correctAnswer(slot);
+                correctAnswer(questionObj);
+                console.log("correctAnswer", selectedAnswer);
             } else {
-                tryAgain();
+                tryAgain(questionObj);
+                console.log("tryAgain", selectedAnswer);
             }
         });
     });
@@ -107,34 +92,29 @@ function clearMessage() {
     modal.querySelector('.modal-container').classList.remove('shake');
     modal.querySelector('.modal-message').style.display = 'none';
     modal.querySelector('.modal-wrapper').style.display = 'none';
-    modal.querySelector('.modal-answers').innerHTML = ``;
+    modal.querySelector('.modal-answers').style.display = 'none';
+    modal.querySelector('.modal-qr').src = '';
+    modal.querySelector('.modal-qr').style.display = 'none';
+    modal.querySelector('.modal-response').innerHTML = '';
+    modal.classList.remove('correct');
+    modal.classList.remove('incorrect');
+    modal.querySelectorAll('.answer-button').forEach(button => {
+        button.removeEventListener('click');
+    });
 }
 
-function correctAnswer(slot) {
+function correctAnswer(q) {
     clearMessage();
-    let prize;
-    let text;
-    switch (true) {
-        case bagSlot === slot:
-            prize = `./assets/answers/answer_bag.png`;
-            text = "bag";
-            break;
-        case toteSlots.includes(slot):
-            prize = `./assets/answers/answer_tote.png`;
-            text = "tote";
-            break;
-        case productSlots.includes(slot):
-            prize = `./assets/answers/answer_prize.png`;
-            text = "prize";
-            break;
-        default:
-            prize = `./assets/answers/answer_sticker.png`;
-            text = "sticker";
-    }
+    modal.classList.add('correct');
     modal.querySelector('.modal-wrapper').style.display = 'flex';
-    modal.querySelector('.modal-prize').src = prize;
-    modal.querySelector('.modal-text').innerHTML = modal_data.copy[text];
-
+    modal.querySelector('.modal-prize').src = `./assets/Icons/correct.png`;
+    modal.querySelector('#icon-1').src = `./assets/Icons/icon-correct-1.png`;
+    modal.querySelector('#icon-2').src = `./assets/Icons/icon-correct-2.png`;
+    document.querySelector('.logo_title').src = './assets/Logos/logo_white.png';
+    modal.querySelector('.modal-text').innerHTML = modal_data.copy.correct;
+    modal.querySelector('.modal-response').innerHTML = q.answer;
+    modal.querySelector('.modal-qr').src = './assets/qr.jpg';
+    modal.querySelector('.modal-qr').style.display = 'block';
     setTimeout(() => {
         confetti({
             particleCount: 200,
@@ -142,18 +122,22 @@ function correctAnswer(slot) {
             spread: 360,
             startVelocity: 35 * size,
             origin: { y: 0.5 },
-            colors: ['FFE400', 'FFBD00', 'E89400', 'FFCA6C', 'FDFFB8']
+            colors: ['ff8732', 'ffaa00']
         });
         modal.querySelector('.modal-container').classList.add('active');
     }, 100)
 }
 
-function tryAgain() {
+function tryAgain(q) {
     clearMessage();
+    modal.classList.add('incorrect');
     modal.querySelector('.modal-wrapper').style.display = 'flex';
-    modal.querySelector('.modal-title').src = `./assets/titles/title_2.png`;
-    modal.querySelector('.modal-prize').src = `./assets/answers/answer_wrong.png`;
+    modal.querySelector('.modal-prize').src = `./assets/Icons/incorrect.png`;
+    modal.querySelector('#icon-1').src = `./assets/Icons/icon-incorrect-1.png`;
+    modal.querySelector('#icon-2').src = `./assets/Icons/icon-incorrect-2.png`;
+    document.querySelector('.logo_title').src = './assets/Logos/logo_white.png';
     modal.querySelector('.modal-text').innerHTML = modal_data.copy.incorrect;
+    modal.querySelector('.modal-response').innerHTML = q.answer;
     setTimeout(() => {
         modal.querySelector('.modal-container').classList.add('shake');
     }, 100)

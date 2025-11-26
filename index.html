@@ -10,10 +10,8 @@
 
 <body>
   <div class="background"></div>
-  <!-- <button class="logo count-btn"><img src="/assets/logo.png" alt="Sondersland Logo" /></button> -->
   <div class="title">
-    <img class="logo_title" src="/assets/Logos/logo.png" alt="Spin and win" />
-    <!-- <h1 class="subtitle">Desliza para girar</h1> -->
+    <img class="logo_title" src="/assets/Logos/logo.png" alt="burger king logo" />
   </div>
   <div class="wheel-container">
     <arrow class="arrow">
@@ -25,38 +23,45 @@
     </div>
   </div>
   <div class="footer">
-    <span>Desliza para girar y acierta la pregunta para recibir tu premio.</span>
+    <span>Desliza para girar y acierta la pregunta para recibir tu cup.</span>
   </div>
 
-  <img class="floater" id="fire" src="assets/Icons/fire.png" alt="fire" />
-  <img class="floater" id="heart" src="assets/Icons/heart.png" alt="heart" />
-  <img class="floater" id="prize" src="assets/Icons/prize.png" alt="prize" />
+  <img class="floater" id="fire" src="/assets/Icons/fire.png" alt="fire" />
+  <img class="floater" id="heart" src="/assets/Icons/heart.png" alt="heart" />
+  <img class="floater" id="prize" src="/assets/Icons/prize.png" alt="prize" />
 
-  <div id="modal" class="modal isVisible">
+  <div id="modal" class="modal">
     <button class="modal-close" aria-label="close"></button>
-    <div class="modal-container active">
+    <div class="modal-container">
       <div class="modal-content">
         <div class="modal-message">
           <!-- message will be dynamically inserted here -->
-           <p class="modal-question">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam, inventore. Illum </p>`;
+          <p class="modal-question">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam, inventore. Illum
+          </p>        
         </div>
         <div class="modal-wrapper">
-          <img class="modal-prize" src="/assets/prizes/prize_1.png" alt="Prize" />
+          <img class="modal-prize" src="/assets/Icons/correct.png" alt="Prize" />
           <div class="modal-text">
             <!-- text will be dynamically inserted here -->
           </div>
+          <div class="modal-response">
+            <!-- answer will be dynamically inserted here -->
+          </div>
+          <img class="modal-qr" src="" alt="QR Code" />
+          <img class="floater" id="icon-1" src="/assets/Icons/icon-correct-1.png" alt="icon-1" />
+          <img class="floater" id="icon-2" src="/assets/Icons/icon-correct-2.png" alt="icon-2" />
         </div>
       </div>
     </div>
     <div class="modal-answers">
-      <button class="answer-button">no</button>
-      <button class="answer-button">si</button>
+      <button class="answer-button" data-answer="1">no</button>
+      <button class="answer-button" data-answer="2">si</button>
       <!-- Answer buttons will be dynamically inserted here -->
+      <img class="floater" id="cloud" src="/assets/Icons/cloud.png" alt="cloud" />
+      <img class="floater" id="icecream" src="/assets/Icons/icecream.png" alt="icecream" />
+      <img class="floater" id="crown" src="/assets/Icons/crown.png" alt="crown" />
+      <img class="floater" id="star" src="/assets/Icons/star.png" alt="star" />
     </div>
-    <img class="floater" id="cloud" src="assets/Icons/cloud.png" alt="cloud" />
-    <img class="floater" id="icecream" src="assets/Icons/icecream.png" alt="icecream" />
-    <img class="floater" id="crown" src="assets/Icons/crown.png" alt="crown" />
-    <img class="floater" id="star" src="assets/Icons/star.png" alt="star" />
   </div>
 
   <!-- <span id="debug"></span> -->
