@@ -1,7 +1,6 @@
 import './style.scss'
 import { Wheel } from './wheel.js'
 import modal_data from './data/questions.js';
-// import confetti from 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/+esm'
 import confetti from 'canvas-confetti';
 
 
@@ -9,6 +8,9 @@ const wheelTouch = document.querySelector('.wheel-touchzone');
 const wheelElm = wheelTouch.querySelector('#wheel');
 const slotAmount = 8;
 const slotCap = 600;
+let currentQuestion = {};
+let currentSlot;
+
 
 let wheel = new Wheel(wheelTouch);
 wheel.slots.setCount(slotAmount); // number of slots on your wheel
@@ -35,6 +37,11 @@ wheelElm.addEventListener('wheelStop', (e) => {
 // document.querySelector(".count-btn").addEventListener('click', updateCap);
 
 document.querySelector('.modal-close').addEventListener('click', closeModal);
+
+// Update answer buttons
+modal.querySelectorAll('.answer-button').forEach(button => {
+    button.addEventListener('click', handleAnswer);
+});
 
 function setSize() {
     size = window.innerHeight / 800;
@@ -70,22 +77,21 @@ function InsertQuestion(slot) {
     modal.querySelector('.modal-message').style.display = 'block';
     modal.querySelector('.modal-answers').style.display = 'flex';
     modal.querySelector('.modal-message').innerHTML = `<p class="modal-question">${questionObj.question}</p>`;
-
-    // Add event listeners to answer buttons
-    modal.querySelectorAll('.answer-button').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const selectedAnswer = parseInt(e.target.getAttribute('data-answer'));
-            if (selectedAnswer === questionObj.solution) {
-                wheel.slots.recordSelection(slot - 1); // Record the selection for the correct answer
-                correctAnswer(questionObj);
-                console.log("correctAnswer", selectedAnswer);
-            } else {
-                tryAgain(questionObj);
-                console.log("tryAgain", selectedAnswer);
-            }
-        });
-    });
+    currentQuestion = questionObj;
+    currentSlot = slot;
 }
+
+function handleAnswer(e) {
+        const selectedAnswer = parseInt(e.target.getAttribute('data-answer'));
+        if (selectedAnswer === currentQuestion.solution) {
+            wheel.slots.recordSelection(currentSlot - 1); // Record the selection for the correct answer
+            correctAnswer(currentQuestion);
+            console.log("correctAnswer", selectedAnswer);
+        } else {
+            tryAgain(currentQuestion);
+            console.log("tryAgain", selectedAnswer);
+        }
+    }
 
 function clearMessage() {
     modal.querySelector('.modal-container').classList.remove('active');
@@ -98,9 +104,6 @@ function clearMessage() {
     modal.querySelector('.modal-response').innerHTML = '';
     modal.classList.remove('correct');
     modal.classList.remove('incorrect');
-    modal.querySelectorAll('.answer-button').forEach(button => {
-        button.removeEventListener('click');
-    });
 }
 
 function correctAnswer(q) {
@@ -112,7 +115,7 @@ function correctAnswer(q) {
     modal.querySelector('#icon-2').src = `./assets/Icons/icon-correct-2.png`;
     document.querySelector('.logo_title').src = './assets/Logos/logo_white.png';
     modal.querySelector('.modal-text').innerHTML = modal_data.copy.correct;
-    modal.querySelector('.modal-response').innerHTML = q.answer;
+    modal.querySelector('.modal-response').innerHTML = "respuesta: <br>" + q.answer;
     modal.querySelector('.modal-qr').src = './assets/qr.jpg';
     modal.querySelector('.modal-qr').style.display = 'block';
     setTimeout(() => {
@@ -137,7 +140,7 @@ function tryAgain(q) {
     modal.querySelector('#icon-2').src = `./assets/Icons/icon-incorrect-2.png`;
     document.querySelector('.logo_title').src = './assets/Logos/logo_white.png';
     modal.querySelector('.modal-text').innerHTML = modal_data.copy.incorrect;
-    modal.querySelector('.modal-response').innerHTML = q.answer;
+    modal.querySelector('.modal-response').innerHTML = "respuesta: <br>" + q.answer;
     setTimeout(() => {
         modal.querySelector('.modal-container').classList.add('shake');
     }, 100)
