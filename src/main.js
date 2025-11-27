@@ -96,7 +96,9 @@ function InsertQuestion(slot) {
 function handleAnswer(e) {
     const selectedAnswer = parseInt(e.target.getAttribute('data-answer'));
     if (selectedAnswer === currentQuestion.solution) {
-        wheel.slots.recordSelection(currentSlot - 1); // Record the selection for the correct answer
+        if (!document.body.classList.contains("agotado")) {
+            wheel.slots.recordSelection(currentSlot - 1); // Record the selection for the correct answer
+        }
         sum = wheel.slots._getAllCounts().reduce((accumulator, currentValue) => accumulator + currentValue, 0);
         correctAnswer(currentQuestion);
     } else {
