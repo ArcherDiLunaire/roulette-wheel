@@ -48,26 +48,24 @@ body {
         width: 100dvw;
         z-index: -1;
     }
-
-    .people {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        pointer-events: none;
-        z-index: 5;
-    }
 }
 
-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 999;
+.agotado {
+    #prize {
+        display: none !important;
+    }
+
+    .modal-text {
+        display: none !important;
+    }
+
+    .modal-qr {
+        display: none !important;
+    }
+
+    .prize-text {
+        display: none !important;
+    }
 }
 
 img {
@@ -87,12 +85,11 @@ img {
 .count-btn {
     appearance: none;
     border: none;
-    pointer-events: auto;
+    pointer-events: auto !important;
     background: transparent;
-
-    &.isActive {
-        mix-blend-mode: luminosity;
-    }
+    position: absolute;
+    height: 7vh;
+    width: 7vh;
 }
 
 .title {
@@ -110,6 +107,7 @@ img {
 .logo_title {
     width: 25vh;
     z-index: 12;
+    pointer-events: none;
 }
 
 .subtitle {
@@ -230,8 +228,9 @@ $animationSpeed: 40s;
 .footer {
     height: 15vh;
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     font-size: 2.7vh;
     line-height: 3vh;
     text-align: center;
@@ -485,6 +484,7 @@ $animationSpeed: 40s;
 
             .modal-text {
                 width: 100%;
+                letter-spacing: 0.1vh;
             }
 
             .modal-response {

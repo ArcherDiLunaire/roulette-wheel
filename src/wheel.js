@@ -82,7 +82,6 @@ export class Wheel {
       this.isDragging = false;
       let speed = this.lastAngles[0] - this.lastAngles[2];
       if (Math.abs(speed) < 7 || Math.abs(this.currentAngle - this.oldAngle) < 50) {
-        console.log(this.currentAngle, this.oldAngle);
         this.animateToTarget(this.currentAngle, this.oldAngle, 500, true);
         return; // Minimum speed to trigger a spin
       }
@@ -139,7 +138,7 @@ export class Wheel {
 
       if (progress < 1) {
         requestAnimationFrame(animate);
-      } else if(this.isSpinning === true) {
+      } else if (this.isSpinning === true) {
         this.isSpinning = false;
         this.oldAngle = this.currentAngle;
         const event = new CustomEvent('wheelStop', { detail: { slot: this.slot } });

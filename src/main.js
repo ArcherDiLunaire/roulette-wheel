@@ -7,22 +7,19 @@ import confetti from 'canvas-confetti';
 const wheelTouch = document.querySelector('.wheel-touchzone');
 const wheelElm = wheelTouch.querySelector('#wheel');
 const slotAmount = 8;
-const slotCap = 600;
+const slotCap = 300;
 let currentQuestion = {};
 let currentSlot;
+let sum = 0;
 
 
 let wheel = new Wheel(wheelTouch);
 wheel.slots.setCount(slotAmount); // number of slots on your wheel
 wheel.slots.setWeights([1, 1, 1, 1, 1, 1, 1, 1]); // weights for each slot (affects probability)
-for (let slot = 1; slot <= slotAmount; slot++) {
-    wheel.slots.setSlotCap(slot - 1, slotCap / slotAmount); // per-slot cap (null = no cap)
-};
-
 const modal = document.getElementById('modal');
 let randomIndex = 0;
-
 let size;
+
 setSize();
 
 clearMessage();
@@ -34,7 +31,7 @@ wheelElm.addEventListener('wheelStop', (e) => {
     showModal(e.detail.slot);
 });
 
-// document.querySelector(".count-btn").addEventListener('click', updateCap);
+document.querySelector(".count-btn").addEventListener('click', updateCap);
 
 document.querySelector('.modal-close').addEventListener('click', closeModal);
 
@@ -57,6 +54,9 @@ function closeModal() {
     modal.classList.remove('isVisible');
     document.querySelector('.logo_title').src = './assets/Logos/logo.png';
     clearMessage();
+    if (sum === slotCap) {
+        document.body.classList.add("agotado");
+    }
 }
 
 function InsertQuestion(slot) {
@@ -81,7 +81,6 @@ function InsertQuestion(slot) {
         default:
             category = "tus_favoritos";
     }
-    console.log("category", category);
     const questions = modal_data.questions[category];
     randomIndex = Math.floor(Math.random() * questions.length);
     const questionObj = questions[randomIndex];
@@ -98,6 +97,7 @@ function handleAnswer(e) {
     const selectedAnswer = parseInt(e.target.getAttribute('data-answer'));
     if (selectedAnswer === currentQuestion.solution) {
         wheel.slots.recordSelection(currentSlot - 1); // Record the selection for the correct answer
+        sum = wheel.slots._getAllCounts().reduce((accumulator, currentValue) => accumulator + currentValue, 0);
         correctAnswer(currentQuestion);
     } else {
         tryAgain(currentQuestion);
@@ -127,7 +127,7 @@ function correctAnswer(q) {
     document.querySelector('.logo_title').src = './assets/Logos/logo_white.png';
     modal.querySelector('.modal-text').innerHTML = modal_data.copy.correct;
     modal.querySelector('.modal-response').innerHTML = "respuesta: <br>" + q.answer;
-    modal.querySelector('.modal-qr').src = './assets/qr.jpg';
+    modal.querySelector('.modal-qr').src = insertQR() ? insertQR() : '';
     modal.querySelector('.modal-qr').style.display = 'block';
     setTimeout(() => {
         confetti({
@@ -139,7 +139,7 @@ function correctAnswer(q) {
             colors: ['ff8732', 'ffaa00']
         });
         modal.querySelector('.modal-container').classList.add('active');
-    }, 100)
+    }, 100);
 }
 
 function tryAgain(q) {
@@ -157,12 +157,14 @@ function tryAgain(q) {
     }, 100)
 }
 
-function updateCap(e) {
-    if (e.currentTarget.classList.contains("isActive")) {
-        e.currentTarget.classList.remove("isActive");
-        wheel.slots.setSlotCap(bagSlot - 1, 0);
+function updateCap() {
+    if (document.body.classList.contains("agotado")) {
+        document.body.classList.remove("agotado");
     } else {
-        e.currentTarget.classList.add("isActive");
-        wheel.slots.setSlotCap(bagSlot - 1, bagCap);
+        document.body.classList.add("agotado");
     }
+}
+
+function insertQR() {
+    return `./qrs/qr_` + String(sum).padStart(3, '0') + `.png`;
 }

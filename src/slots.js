@@ -2,7 +2,7 @@
 export class Slots {
     constructor() {
         // --- Add these properties in your constructor (or set defaults there) ---
-        this.slotCount = 12;                 // number of slots on your wheel
+        this.slotCount = 8;                 // number of slots on your wheel
         this.weights = new Array(this.slotCount).fill(1); // default equal weights
         this.slotCaps = new Array(this.slotCount).fill(null); // per-slot cap (null = no cap)
         this._storageKey = 'wheel_selection_history_v1';

@@ -12,6 +12,7 @@
   <div class="background"></div>
   <div class="title">
     <img class="logo_title" src="/assets/Logos/logo.png" alt="burger king logo" />
+    <button class="count-btn"></button>
   </div>
   <div class="wheel-container">
     <arrow class="arrow">
@@ -23,7 +24,8 @@
     </div>
   </div>
   <div class="footer">
-    <span>Desliza para girar y acierta la pregunta para recibir tu cup.</span>
+    <span>Desliza para girar</span>
+    <span class="prize-text"> y acierta la pregunta para recibir tu cup.</span>
   </div>
 
   <img class="floater" id="fire" src="/assets/Icons/fire.png" alt="fire" />
@@ -37,15 +39,15 @@
         <div class="modal-message">
           <!-- message will be dynamically inserted here -->
           <p class="modal-question">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam, inventore. Illum
-          </p>        
+          </p>
         </div>
         <div class="modal-wrapper">
           <img class="modal-prize" src="/assets/Icons/correct.png" alt="Prize" />
-          <div class="modal-text">
-            <!-- text will be dynamically inserted here -->
-          </div>
           <div class="modal-response">
             <!-- answer will be dynamically inserted here -->
+          </div>
+          <div class="modal-text">
+            <!-- text will be dynamically inserted here -->
           </div>
           <img class="modal-qr" src="" alt="QR Code" />
           <img class="floater" id="icon-1" src="/assets/Icons/icon-correct-1.png" alt="icon-1" />
@@ -64,7 +66,7 @@
     </div>
   </div>
 
-  <!-- <span id="debug"></span> -->
+  <span id="debug"></span>
   <script type="module" src="/src/main.js"></script>
 </body>
 
