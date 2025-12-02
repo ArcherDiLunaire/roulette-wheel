@@ -127,7 +127,7 @@ function correctAnswer(q) {
     modal.querySelector('#icon-1').src = `./assets/Icons/icon-correct-1.png`;
     modal.querySelector('#icon-2').src = `./assets/Icons/icon-correct-2.png`;
     document.querySelector('.logo_title').src = './assets/Logos/logo_white.png';
-    modal.querySelector('.modal-text').innerHTML = modal_data.copy.correct;
+    modal.querySelector('.modal-text').innerHTML = document.body.classList.contains("agotado") ? modal_data.copy.agotado : modal_data.copy.correct;
     modal.querySelector('.modal-response').innerHTML = "respuesta: <br>" + q.answer;
     modal.querySelector('.modal-qr').src = insertQR() ? insertQR() : '';
     modal.querySelector('.modal-qr').style.display = 'block';

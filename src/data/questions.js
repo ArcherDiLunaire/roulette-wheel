@@ -247,7 +247,8 @@ const modal_data = {
     },
     copy: {
         incorrect: "Inténtalo otra vez",
-        correct: "Fotografíe este código QR para recoger tu premio en la barra central."
+        correct: "Fotografíe este código QR para recoger tu premio en la barra central.",
+        agotado: "Uy... Este juego ha tenido tanto éxito que nos hemos quedado sin premios. ¡Gracias por vuestra participación!"
     }
 };
 
